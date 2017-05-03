@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px/22px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #333;
+  background: #fafafa;
+}
+
+a {
+  color: #00B7FF;
+}
+input[type=text]{
+	border: none;
+	outline: none;
+	width: 100%;
+	border: 1px solid #ccc;
+}
+input[type=submit]{
+	width: 60px;
+	height: 25px;
+}
+table{
+	width: 100%;
+	margin: 20px 0%;
+	border: none;
+	border-collapse: collapse;
+}
+table th{
+	background: #f3f3f3;
+	font-weight: bold;
+	border: 1px solid #dadada;
+}
+
+table td{
+	background: #fff;
+	border: 1px solid #dadada;
+	text-align: center;
+	padding:4px 20px;
+}
