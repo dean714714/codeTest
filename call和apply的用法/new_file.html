@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//在本文档下的【js继承和多态】的记录中已经用过一次call，实是用来继承一个构造函数的属性和方法（不含原型）
+			//fun.call(object,[arg,arg...])
+			//call的作用是改变函数执行的作用域，换言之就是，让新的对象/函数（函数也是对象）继承函数这个方法并立即执行
+			//例1--实现对象继承：
+			function A(){//构造函数A
+				this.value = 'hello world!';
+				this.foo = function(){
+					alert(this.value)
+				}
+			}
+			//*********继承的写法一***********
+				var b = {};
+				A.call(b);
+				console.log(b)//b对象将继承A构造函数的属性和方法
+				//也可以采用下面这种写法，结构清晰点
+			//*********继承的写法二***********
+				function B(){//构造函数B
+					A.call(this);//this指当前构造函数的实例化对象
+				}
+				var newB = new B();
+				console.log(newB)
+			//例2--变更执行环境（作用域）,对象本没有fun()函数，现在却能直接调用
+				//fun.call(object,[arg,arg...])相当于object.fun([arg,arg...]);
+				function c(){
+					alert(this);
+				}
+				c();//输出:window对象
+				var d = {
+					a:'11'
+				}
+				c.call(d)//输出:Object对象(实为d对象)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
