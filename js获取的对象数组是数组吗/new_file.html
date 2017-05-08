@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.spanBox{
+				display: inline-block;
+				line-height: 32px;
+				background: #0077ff;
+				padding: 0 10px;
+				text-align: center;
+				color: #fff;
+			}
+			b{
+				line-height: 36px;
+			}
+		</style>
+		<script type="text/javascript">
+			function Num(btn,obj){
+				this.btn = btn;
+				this.obj = obj;
+				this.outType = function(){
+					var $brother = btn.parentNode.children;
+					for(i=0;i<$brother.length;i++){
+						if($brother[i].className == 'result'){alert('结果已显示在下方！');return;}
+					}
+					var div = document.createElement('div');
+					div.setAttribute('class','result');
+					div.style.cssText = "padding:10px;background:#eaeaea;margin: 10px 0;"
+					//var $span1 = document.getElementById('span1');
+					div.innerHTML = obj+';他的typeof数据类型是:'+(typeof obj)+';他 instanceof Array是:'+(obj instanceof Array);
+					btn.parentNode.appendChild(div);
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<h2>本文通过对比区分js中主要获取对象的方式，<i style="color: #ff3311;">且阐明获取的对象数组是不是数组</i></h2>
+		<span class="spanBox" id='span1'>我是span1</span>
+		<span class="spanBox" id='span2'>我是span2</span>
+		<span class="spanBox" id='span3'>我是span3</span>
+		<ul>
+			<li>
+				<b>1、document.getElementById()</b><br />
+				这种方式只能指明对象id才能获取的到，比方说document.getElementById('span1')
+				<input type="button" name="" id="" value="点我查看获取span1是什么" onclick="(new Num(this,document.getElementById('span1'))).outType()" />
+			</li>
+			<li>
+				<b>1、document.getElementByTagName()</b><br />
+				这种方式获取到的是一个数组，要想操作其中某个dom，需要制定索引，就像这样document.getElementByTagName('span')[0]
+				<input type="button" name="" id="" value="点我查看获取span是什么" onclick="(new Num(this,document.getElementsByTagName('span'))).outType()" />
+				<div class="explain">
+					<!--这里写阐述-->
+					我们发现，虽然可以通过document.getElementByTagName('span')[0]这种数组的选择方式来获取某个对象(对象不能直接用索引获取属性和方法，但可以使用属性名，就像这样：obj['name'])，但其他同上上诉答案可以发现
+					它其实不是数组，而是对象。
+				</div>
+			</li>
+		</ul>
+	</body>
+</html>
