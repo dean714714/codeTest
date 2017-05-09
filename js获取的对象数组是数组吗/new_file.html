@@ -15,9 +15,14 @@
 			b{
 				line-height: 36px;
 			}
+			.explain{
+				text-decoration: underline;
+				color: #882288;
+				margin: 10px 0;
+			}
 		</style>
 		<script type="text/javascript">
-			function Num(btn,obj){
+			function Num(btn,obj){//方法仅用于数据显示与本文的探讨无关
 				this.btn = btn;
 				this.obj = obj;
 				this.outType = function(){
@@ -31,6 +36,23 @@
 					//var $span1 = document.getElementById('span1');
 					div.innerHTML = obj+';他的typeof数据类型是:'+(typeof obj)+';他 instanceof Array是:'+(obj instanceof Array);
 					btn.parentNode.appendChild(div);
+					var $explain = [],j=0;//存放阐述的数组（万一有好几个阐述呢），收集完成在遍历显示
+					for(i=0;i<$brother.length;i++){
+						if($brother[i].className == 'explain'){
+							$explain[j] = $brother[i];
+							j++;
+							btn.parentNode.removeChild($brother[i]);
+							i--;//删除node后，遍历索引减一
+							//console.log($explain);
+						}
+					}
+					for(item=0;item<$explain.length;item++){
+						btn.parentNode.appendChild($explain[item]);
+						//setTimeout(function(){
+							console.log($explain)
+							$explain[item].style.display = 'block';
+						//},500)
+					}
 				}
 			}
 			
@@ -49,11 +71,11 @@
 			</li>
 			<li>
 				<b>1、document.getElementByTagName()</b><br />
-				这种方式获取到的是一个数组，要想操作其中某个dom，需要制定索引，就像这样document.getElementByTagName('span')[0]
+				这种方式获取到的是一个数组，要想操作其中某个dom，需要指定索引，就像这样document.getElementByTagName('span')[0]
 				<input type="button" name="" id="" value="点我查看获取span是什么" onclick="(new Num(this,document.getElementsByTagName('span'))).outType()" />
-				<div class="explain">
+				<div class="explain" style="display: none;">
 					<!--这里写阐述-->
-					我们发现，虽然可以通过document.getElementByTagName('span')[0]这种数组的选择方式来获取某个对象(对象不能直接用索引获取属性和方法，但可以使用属性名，就像这样：obj['name'])，但其他同上上诉答案可以发现
+					我们发现，虽然可以通过document.getElementByTagName('span')[0]这种数组的选择方式来获取某个对象(对象不能直接用索引获取属性和方法，但可以使用属性名，就像这样：obj['name'])，但其他同下诉答案可以发现
 					它其实不是数组，而是对象。
 				</div>
 			</li>
