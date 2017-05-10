@@ -25,7 +25,7 @@
 			function Cat2(color,age,size){
 				this.size = size;//新增的属性
 				Cat.call(this,color,age);//调用Cat构造函数，继承Cat的属性和方法，但是注意无法继承原型，使用下方的方式继承原型
-			}
+			}							//如果是apply写法就是Cat.apply(this,[color,age]);
 			for(item in Cat.prototype){//继承原型
 				Cat2.prototype[item] = Cat.prototype[item];
 			}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		那么，在使用new操作符来调用一个构造函数的时候，发生了什么呢？其实很简单，就发生了四件事：http://www.tuicool.com/articles/rEJN7n6
+		<br />
+		var obj  ={};<br />
+		obj.__proto__ = CO.prototype;//这一步对象继承构造函数的prototype属性指向的对象(但原型中依旧有原型，每个对象都有继承来原型)<br />
+		CO.call(obj);//这一步对象继承构造函数的属性和方法<br />
+		return obj;<br />
+	</body>
+	<script type="text/javascript">
+		function Cat(name){
+			this.name = name;
+			this.fun = function(){
+				alert('this is a '+this.name);
+			}
+		}
+//		Cat.prototype = {
+//			skill: 'cry!'
+//		}
+		console.log(Cat)
+		console.log(new Cat('jane'))//__proto__中还是有__proto__
+	</script>
+</html>

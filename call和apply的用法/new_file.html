@@ -34,7 +34,7 @@
 			//例2--变更执行环境（作用域）,对象本没有fun()函数,现在却能直接调用
 				//fun.call(object,[arg,arg...])相当于object.fun([arg,arg...]);
 				function c(){
-					alert(this);
+					console.log(this);
 				}
 				c();//输出:window对象
 				var d = {
@@ -51,10 +51,10 @@
 					this.d_value = 'this is not d';
 				}
 				d_fun.call(d)//执行函数实现继承
-				alert(d.d_value)//输出：this is not d
+				console.log(d.d_value)//输出：this is not d
 				//现在我想输出上诉的d_value的值( 当然我们可以直接alert(d.d_value) )
 				function d_fun2(){
-					alert(this.d_value)
+					console.log(this.d_value)
 				}
 				d_fun2.call(d)//执行函数实现输出：this is not d（因为对象已被改变）
 			//例4--调用原生对象的功能给其他对象使用
@@ -63,7 +63,9 @@
 				//slice()可以从数组和字符串中提取部分返回新的数组。这个操作其实不是将slice()函数赋予给$box对象数组，
 				//而是相当于Array.prototype.slice.call($box,0)，也就是
 				//$box.slice(0)（0可省略不写）（当然直接这样写是会提示$box没有slice()这个函数，所以要借助call）,
-				//返回一个新的数组，原先的$box虽然也是数组但是却是可以使用$box[num]这样操作的对象(htmlcollection),转换后就变成了array
-				console.log(domNodes.slice(0,1)[0].innerHTML)//输出：这是一个关于call()函数的应用demo
+				//返回一个新的数组，原先的$box虽然可以使用$box[num]这样的数组操作，但他其实是对象(htmlcollection),转换后就变成了array，当然也就可以使用数组的slice()等数组里的方法了
+				console.log(domNodes[0].innerHTML)//输出：这是一个关于call()函数的应用demo
+			//例5--接上
+				//console.log(new Array())
 		</script>
 </html>

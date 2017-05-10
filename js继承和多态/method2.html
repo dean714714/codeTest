@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function Cat(name,color){
+				this.name = name;
+				this.color = color;
+				this.fun = function(){
+					alert('this is a '+color+' cat named '+name)
+				}
+			}
+			var cat1 = new Cat('jane','black');
+//			cat1.prototype = {
+//				fun2:function(){
+//					alert('its a happy boy!')
+//				}
+//			}
+			
+			var cat2 = Object.create(cat1)
+			console.log(cat2)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
