@@ -16,13 +16,14 @@
 			.btm{
 				height:100px;
 				background:#0066ff;
+                position:relative;
 			}
 			.top{
 				position:relative;
 			}
 		</style>
 		<script type="text/javascript">
-		//定义模块
+		  //定义球模块
 			var bollModule = (function(){
 				var boll = {};
 				boll.radii = function(){//随机半径
@@ -45,6 +46,9 @@
 						return $div;
 					}
 				}
+                boll.place = function(){
+                    
+                }
 				boll.bollAnimate = function(obj,space,leftVal){//boll 从底部向上运动动画
 					obj.style.position = 'absolute';
 					obj.style.left = leftVal;
@@ -63,14 +67,27 @@
 				}
 				return boll;
 			})()
-		//应用
-			window.onload = function(){
+		    //应用
+            window.onload = function(){
 				
-				var color = bollModule.color();
-				var radii = bollModule.radii();
-				var $obj = new bollModule.BollObj(radii,color).creatObj();
 				var $space = document.getElementById('top');
-				bollModule.bollAnimate($obj,$space,"100px");
+                var $btm = document.getElementById('btm');
+				//bollModule.bollAnimate($obj,$space,"100px");
+                var $obj;
+                
+                $btm.onmousedown = function(event){
+                    var color = bollModule.color();
+                    var radii = bollModule.radii();
+                    $obj = new bollModule.BollObj(radii,color).creatObj();
+                    
+                    $btm.appendChild($obj);
+                    $obj.style.position = 'absolute';
+                    $obj.style.left = event.pageX-parseInt(radii)*0.5+'px';
+                    $obj.style.top = parseInt(event.pageY)-parseInt(this.offsetTop)-                                    parseInt(radii)*0.5+'px';
+                }
+                $btm.onmousemove = function(event){
+                    
+                }
 				
 			}
 			
@@ -82,7 +99,7 @@
 				<td class="top" id="top"></td>
 			</tr>
 			<tr>
-				<td class="btm"></td>
+				<td class="btm" id="btm"></td>
 			</tr>
 		</table>
 	</body>
