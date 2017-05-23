@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				height: 100%;
+				margin:0;
+			}
+			table{
+				width: 100%;
+				height: 100%;
+				border-collapse:collapse;
+			}
+			.btm{
+				height:100px;
+				background:#0066ff;
+			}
+			.top{
+				position:relative;
+			}
+		</style>
+		<script type="text/javascript">
+		//定义模块
+			var bollModule = (function(){
+				var boll = {};
+				boll.radii = function(){//随机半径
+					return Math.floor(Math.random()*60)+'px';
+				}
+				boll.color = function(){//随机背景色
+					var colorVal = '#';
+					for(i=0;i<6;i++){
+						var index = Math.floor(Math.random()*16);
+						colorVal += ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'][index];
+					}
+					return colorVal;
+				}
+				boll.BollObj = function(rd,cl){//创建boll
+					this.rd = rd;
+					this.cl = cl;
+					this.creatObj = function(){
+						var $div = document.createElement('div');
+						$div.style.cssText = "width:"+this.rd+";height:"+this.rd+";background:"+this.cl+";border-radius:100%;";
+						return $div;
+					}
+				}
+				boll.bollAnimate = function(obj,space,leftVal){//boll 从底部向上运动动画
+					obj.style.position = 'absolute';
+					obj.style.left = leftVal;
+					obj.style.bottom = 0;
+					space.appendChild(obj);
+					var bollAni = setInterval(function(){
+						//var obj = obj||{};
+						console.dir(obj.offsetTop)
+						if(parseInt(obj.offsetTop)>0){
+							obj.style.top = obj.offsetTop-1+"px";
+						}else{
+							clearInterval(bollAni);
+							obj.parentNode.removeChild(obj);
+						}
+					},4)
+				}
+				return boll;
+			})()
+		//应用
+			window.onload = function(){
+				
+				var color = bollModule.color();
+				var radii = bollModule.radii();
+				var $obj = new bollModule.BollObj(radii,color).creatObj();
+				var $space = document.getElementById('top');
+				bollModule.bollAnimate($obj,$space,"100px");
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td class="top" id="top"></td>
+			</tr>
+			<tr>
+				<td class="btm"></td>
+			</tr>
+		</table>
+	</body>
+</html>

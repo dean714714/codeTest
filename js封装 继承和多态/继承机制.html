@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<b>JavaScript 的继承机制是基于原型的。细看<a target="_blank" href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes">【对象原型】</a></b>
-		<br/>继承是相对于类也就是js中的构造函数而言的，是为了扩展既有功能出现的解决方案。没有说继承与某个普通对象。
+		<br/>继承是相对于类也就是js中的构造函数而言的，是为了扩展既有功能出现的解决方案。（也有对象继承对象的，参见http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance_continued.html）
 		<br/>js 的继承机制是基于原型的。new Cat()不叫继承，而是实例化。
 		<br/>js中万物皆对象，而通常我们说的继承像java中是有类的继承，既然皆是对象，对象如何实现继承。
 		<br/>对象的继承承托于一个叫原型的东西，每个对象都有原型属性__proto__（原型链向的对象自然也有），这个原型属性的值是一个链接链向一个对象，这个被链接的对象指明了它的出处和继承来的功能，
