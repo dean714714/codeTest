@@ -5,7 +5,10 @@
 		<title></title>
 	</head>
 	<body>
-		<input type="text" id="ipt" /><span id="con"></span>
+		<input type="text" id="ipt" />
+		<div id="con"></div>
+		<div id="con2"></div>
+		<div id="con3"></div>
 	</body>
 	<script type="text/javascript">
 		//参考阅读：js设计模式系列之(二)订阅发布模式    http://www.tuicool.com/articles/mqQZ7nJ
@@ -25,21 +28,35 @@
 		//原生js的方式
 			var $ipt = document.getElementById('ipt');
 			var $con = document.getElementById('con');
+			var $con2 = document.getElementById('con2');
+			var $con3 = document.getElementById('con3');
 			//1、采用轮询的方式，也就是高频的不断去读取input的内容
 //			setInterval(function(){
 //				$con.innerHTML = $ipt.value;
 //			},10)
 				//这种方式的确可以实现上诉小案例，但是问题在于:1、高频的timer耗费性能；  2、如果有其他异步任务将没法不卡顿的同步信息
 			//2、其实大多数时候这种轮询都是做无用功的，因为我可能啥也没做，但却保持着高负荷的异步任务，实际上只有当我们输入的时候才有必要去读取信息
-			$ipt.addEventListener('change',function(){
-				$con.innerHTML = $ipt.value;
-			})
+//			$ipt.addEventListener('change',function(){
+//				$con.innerHTML = $ipt.value;
+//			})
 				//js自带的onchangge事件可以实现功能，但只能在表单失去焦点才能将结果变动给$con,我们其实可以自己实现
-			//3、自定义事件
-			var event = new Event('change2');
-			
-			
-			
+			//3、自定义事件，观察者模式
+			var change2Event = new Event('change2');
+			function EventFun(obj){//具体触发后要做的事情写在这里
+				this.obj = obj;
+				this.callback = function(){
+					obj.innerHTML = $ipt.value;
+					obj.style.color = '#ffaa00';
+				}
+			}
+				//订阅者
+			document.addEventListener('change2',new EventFun($con).callback)//添加多个事件监听（什么时候触发看具体需求），回调采用函数引用传入，减弱耦合
+			document.addEventListener('change2',new EventFun($con2).callback)
+			document.addEventListener('change2',new EventFun($con3).callback)
+				
+			$ipt.addEventListener('keypress',function(){
+				document.dispatchEvent(change2Event);//发布者
+			})
 			
 	</script>
 </html>
