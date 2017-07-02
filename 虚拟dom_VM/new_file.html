@@ -8,12 +8,13 @@
 	<body>
 	</body>
 	<script type="text/javascript">
-			var vmDiv = new Element('div',{class:'blcok',id:'bl'},[
+			var vmDiv = new Element('div',{class:'blcok',id:'bl'},[//定义虚拟DOM
 				new Element('i',{class:'sub1',id:'subl'},['这是子节点1']),
 				new Element('b',{class:'sub2',id:'sub2'},['这是子节点2'])
 			])
 			//console.dir(vmDiv)
-			var vmDiv_dom = vmDiv.render();
-			document.body.appendChild(vmDiv_dom);
+			var vmDiv_dom = vmDiv.render();//渲染dom树
+			document.body.appendChild(vmDiv_dom);//将dom树添加到已有dom树中
+			
 		</script>
 </html>
