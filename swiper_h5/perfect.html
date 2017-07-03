@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Swiper中文网基础演示(www.swiper.com.cn)</title>
+		<script type="text/javascript">
+			//添加加载进度
+			var $mask = document.createElement('div');
+			var $process = document.createElement('span');
+			$mask.style.cssText = 'position: fixed;z-index: 100;background: rgba(0,0,0,1);width: 100%;height: 100%;left:0;top:0;text-align: center;'
+			$process.style.cssText = 'font-size:40px;font-weight:bold;color:#fff;margin:100px 0;'
+			$process.innerText = '加载中~';
+			$mask.appendChild($process);
+			document.documentElement.appendChild($mask);
+			
+		</script>
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.min.css" />
+
+		<!--Swiper3.0.4-->
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.blue-slide {
+				background: #4390EE;
+			}
+			
+			.red-slide {
+				background: #CA4040;
+			}
+			
+			.orange-slide {
+				background: #FF8604;
+			}
+			
+			.green-slide {
+				background: #00ff00;
+			}
+			
+			.swiper-slide {
+				line-height: 300px;
+				color: #fff;
+				font-size: 36px;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<!--下面的slide和slide的节点不要使用id来作为选择器进行获取dom，因为框架本身有对id的操作会出错,可以使用自定义属性-->
+				<div class="swiper-slide blue-slide" data-hash='slide1'>
+					<img src="img/baozou1.jpg" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s" />
+				</div>
+				<div class="swiper-slide red-slide" data-hash='slide2'>slider2</div>
+				<div class="swiper-slide orange-slide" data-hash='slide3'>slider3</div>
+				<div class="swiper-slide green-slide" data-hash='slide4'>slider4</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/swiper.min.js"></script>
+	<script src="js/swiper.animate1.0.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		//查看new_file.html文件中冗长的代码，现整理如下，
+		//本来预想是想切换到不同页面时才开始执行动画，当然new_file.html中的操作也是可以的，可以在初始化时不用执行太多
+		//的动画以防卡顿，但只对于当时预防得初衷而言却是不需要这么做的，因为切换的时候不用动态添加属性，属性还是可以直接添加到标签中，只需要在
+		//切换的时候执行一遍"swiperAnimate(swiper)"就可以使得产生动画，因为动画的产生和那些属性没有直接关系，这些属性只是swiper插件
+		//的标记而已，实际上还是通过"swiperAnimate(swiper)"识别这些标记为对象标签添加css动画样式。相较于new_file.html中复杂的
+		//书写方式，虽然初始化的时候可能会出现卡顿，但实际且加之这份书写便捷性，还是如下方便
+		window.onload = function() {
+			$mask.parentNode.removeChild($mask); //加载完成移除"加载中"的显示
+			var mySwiper = new Swiper('.swiper-container', {
+				loop: false,
+				speed: 800,
+				direction: 'vertical',
+				autoplayStopOnLast: true,
+				hashnav: true,
+				roundLengths: true,
+				passiveListeners : false,//提升swiper在移动设备的中的scroll表现
+	
+				onInit: function(swiper) { //初始化
+					//$mask.parentNode.removeChild($mask);
+					swiperAnimateCache(swiper); //隐藏动画元素
+					swiperAnimate(swiper); //初始化完成开始动画
+				},
+				onSlideChangeEnd: function(swiper) { //页面切换完成触发
+					
+					swiperAnimate(swiper); //执行动画（不加将没有效果）
+				
+				}
+			})
+		}
+	</script>
+
+</html>
