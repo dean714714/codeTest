@@ -37,7 +37,7 @@
 					<img src="img/home_bottom_logo.png" class="loginBlogo"/>
 					<div style="display: none;" class="ani loginCon" id="loginCon1" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="0s" >
 						<div class="formList borderBottom">
-							<div class="yzmBtn borderLeft" style="width: 10rem;" onclick="getYzm(this,10)">获取验证码</div>
+							<div class="yzmBtn borderLeft" style="width: 10rem;" @click="getYzm($event,10)">获取验证码</div>
 							<input type="text" class="formIn" name="" id="phoneNum" value="" placeholder="请输入手机号" data-check = "checkPhone"/>
 						</div>
 						<div class="formList borderBottom">
@@ -46,8 +46,8 @@
 						<div class="ani form_btn" style="width: 100%;margin-top: 2.1rem;" onclick="loginIn()">登录</div>
 					</div>
 					<div style="display: none;" class="ani loginCon" id="loginCon2" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="0s" >
-						<div class="loginLogo"><span id="loginName">未实名</span>
-							<img src="img/loginOut.png" class="loginOut btn"/>
+						<div class="loginLogo"><span id="loginName"><!--未实名--></span>
+							<img src="img/loginOut.png" class="loginOut btn" @click="loginOut()"/>
 						</div>
 						<span class="cardBox">
 							
@@ -275,26 +275,26 @@
 					<div id="page7Con2" style="display: none;">
 						<img src="img/p7_title1.png" class="ani p7_title1" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="0s" />
 						<div class="ani p4Ele" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1s" >
-							<span>节省排队时间约：</span><br/>
-							<span class="counter" data-counter-time="1000" data-counter-delay="1000">120</span><span>分钟</span><br />
+							<!--<span>节省排队时间约：</span><br/>
+							<span class="counter" data-counter-time="1000" data-counter-delay="1000">120</span><span>分钟</span><br />-->
 							<span>在线充值</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">86</span><span>次</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">623</span><span>元</span><br />
 							<span>医疗预约</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">14</span><span>次</span><br />
 							<span>诊间结算</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">11</span><span>次</span>
 						</div>
 						<img src="img/p7_img1.png" class="ani p7_img1" swiper-animate-effect="fadeInUp" swiper-animate-duration="1s" swiper-animate-delay="0s" />
 					</div>
-					<div id="page7Con3" style="display: none;">
+					<div id="page7Con3" style="">
 						<img src="img/p7_title2.png" class="ani p7_title2" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="0s" />
 						<div class="ani p4Ele" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1s" >
-							<span>节省排队时间约：</span><br/>
-							<span class="counter" data-counter-time="1000" data-counter-delay="1000">120</span><span>分钟</span><br />
+							<!--<span>节省排队时间约：</span><br/>
+							<span class="counter" data-counter-time="1000" data-counter-delay="1000">120</span><span>分钟</span><br />-->
 							<span>在线充值</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">86</span><span>次</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">623</span><span>元</span><br />
 							<span>医疗预约</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">14</span><span>次</span><br />
 							<span>诊间结算</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">11</span><span>次</span>
 						</div>
 						<img src="img/p7_img1.png" class="ani p7_img1" swiper-animate-effect="fadeInUp" swiper-animate-duration="1s" swiper-animate-delay="0s" />
 					</div>
-					<div id="page7Con4">
+					<!--<div id="page7Con4">
 						<img src="img/p7_title4.png" class="ani p7_title4" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="0s" />
 						<div class="ani p4Ele" swiper-animate-effect="fadeIn" swiper-animate-duration="0.5s" swiper-animate-delay="1s" >
 							<span>节省排队时间约：</span><br/>
@@ -304,7 +304,7 @@
 							<span>诊间结算</span><span class="counter" data-counter-time="1000" data-counter-delay="1000">11</span><span>次</span>
 						</div>
 						<img src="img/p7_img2.png" class="ani p7_img1" swiper-animate-effect="fadeInUp" swiper-animate-duration="1s" swiper-animate-delay="0s" />
-					</div>
+					</div>-->
 				</div>
 				<div class="swiper-slide" data-hash='slide8'>
 					<div class="ani jplEle" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay="0s" >
@@ -339,7 +339,7 @@
 	<script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
 	<!--<script src="js/jquery.countup.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/jquery.waypoints.min.js" type="text/javascript" charset="utf-8"></script>-->
-	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="js/common.js" type="text/javascript" charset="utf-8"></script>-->
 	<script src="js/echarts.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/count.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/swiper.min.js"></script>

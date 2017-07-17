@@ -1,26 +1,40 @@
 
-let $loginCon1 = $("#loginCon1");//登录页的登录块和查询块
-let $loginCon2 = $("#loginCon2");
+
 //读取localStorage中的用户信息初始化
-(function(){
+function init(){
+	let $loginCon1 = $("#loginCon1");//登录页的登录块和查询块
+	let $loginCon2 = $("#loginCon2");
+	//localStorage.clear();
 	let userName,cardInfo,userlevel,userId;
-	userId = localStorage.getItem('userId');
-	userName = localStorage.getItem('userName');
-	cardInfo = localStorage.getItem('cardInfo');
-	alert(userId)
-	if(userId===null){
+	userId = localStorage.getItem('userId')||null;
+	if(!userId){
 		$loginCon2.hide();
 		$loginCon1.show();
+		clearDom();//初始化的时候清除dom中表单和卡信息
 	}else{
+		let phoneNum = localStorage.getItem('phoneNum');
+		userName = getUserInfo(phoneNum).userName;
+		userlevel = getUserInfo(phoneNum).userlevel;
+		cardInfo = getUserInfo(phoneNum).cardInfo;
+		initSearchPage(userName,userlevel,cardInfo);//如果本地有数据初始化查询页面
 		$loginCon2.show();
 		$loginCon1.hide();
-		initSearchPage(userName,cardInfo);//如果本地有数据初始化查询页面
 	}
-})()
+}
+init();
 
-function initSearchPage(userName,cardInfo){
-	var $loginName = $("#loginName");
-	if(userName===null){
+//清空页面表单
+function clearDom(){
+	$formIn = $(".formIn");
+	$cardBox = $(".cardBox");
+	$formIn.val('');
+	$cardBox.html('');
+}
+//初始化查询页
+function initSearchPage(userName,userlevel,cardInfo){
+	//let userName,userlevel,cardInfo;
+	let $loginName = $("#loginName");
+	if(userlevel===0){
 		$loginName.html('未实名');
 		$loginName.click(function(){
 			alert('当前用户未实名，请至【杭州市民卡】APP完成实名操作！')
@@ -121,15 +135,15 @@ function checkCard(value){
 //添加杭州通卡
 function addCard(value){
 	if(value){
-		var $cardBox = $(".cardBox");
-		var $cardNum = $(".cardBox").find(".cardNum").length>0?$(".cardBox").find(".cardNum"):{};
+		let $cardBox = $(".cardBox");
+		let $cardNum = $(".cardBox").find(".cardNum").length>0?$(".cardBox").find(".cardNum"):{};
 		for(i=0;i<$cardNum.length;i++){
 			if($cardNum.eq(i).html()===value){
 				alert('该卡号已经添加，不能重复添加！');
 				return;
 			}
 		}
-		var $card = $('<div class="formList borderBottom">'+
+		let $card = $('<div class="formList borderBottom">'+
 					'<img src="img/clearInfo.png" class="clearInfo" onclick="delCard(this,'+value+')"/>'+
 					'<div class="cardNum">'+value+'</div>'+
 				'</div>');
@@ -156,23 +170,13 @@ function delCardInData(value){
 
 //通过手机号获取用户id,用户名,等级和卡信息
 function getUserInfo(phoneNum){
-	let userName,userId,userlevel,cardInfo;
-	if(localStorage.userId===null){
-		//如果为空就去根据手机号请求数据，不然读取本地
-		userName = 'zhangSan';
-		userId = 'zh008';
-		userlevel = 0;
-	}else{
-		userName = localStorage.userName;
-		userId = localStorage.userId;
-		userlevel = localStorage.userlevel;
-	}
-	if(localStorage.cardInfo===null){
-		//如果为空就去根据用户名请求数据，不然读取本地
-		cardInfo = [1231231,39811123,12938912];
-	}else{
-		cardInfo = localStorage.cardInfo;
-	}
+	let userName='',userId='',userlevel='',cardInfo=[];
+	//下述数据通过手机号ajax获取
+	userName = 'zhangSan';
+	userId = 'zh008';
+	userlevel = 1;
+	cardInfo = [1231231,39811123,12938912];
+	
 	return {
 		userName: userName,
 		userId: userId,
@@ -184,7 +188,7 @@ function getUserInfo(phoneNum){
 function loginIn(){
 	let phoneNum = $("#phoneNum").val();
 	let codeNum = $("#codeNum").val();
-	if(phoneNum===''||codeNum===''){
+	if(!phoneNum||!codeNum){
 		alert("手机号或验证码不能为空，请确认！")
 	}else{
 		let userId = getUserInfo(phoneNum).userId;
@@ -192,35 +196,46 @@ function loginIn(){
 		let userlevel = getUserInfo(phoneNum).userlevel;
 		let cardInfo = getUserInfo(phoneNum).cardInfo;
 		storeId(userId);
-		storeName(userName);
-		storeId(userlevel);
-		storeId(cardInfo);
+		storePhone(phoneNum);
 		$("#loginCon1").hide();
 		$("#loginCon2").show();
-		initSearchPage(userName,cardInfo);//如果本地有数据初始化查询页面
+		initSearchPage(userName,userlevel,cardInfo);//初始化查询页面
 	}
+}
+//推出系统
+function loginOut(){
+	localStorage.clear()//如果点击退出则清空本地数据
+	init();
 }
 //查询数据
 function search(callback){
+//	let $cardBox = $(".cardBox");
+//	let $cardList = $(".cardBox").find('.cardNum');
+//	let cardInfo = [];
+//	for(let i=0;i<$cardList.length;i++){
+//		cardInfo.push($cardList.eq(i).html())
+//	}
+
+//	new Promise(function(resolve,reject){
+//		getData(url,'post','6月份',resolve)
+//	}).then(function(){
+//		//将数据赋予图表
+//		callback();
+//	})
 	callback();
 }
 //存储用户id到本地
 function storeId(data){
-	localStorage.setItem('loginId',data);
+	localStorage.setItem('userId',data);
 }
-//存储用户名到本地
-function storeName(data){
-	localStorage.setItem('loginName',data);
+//存储用户手机号到本地
+function storePhone(data){
+	localStorage.setItem('phoneNum',data);
 }
-//存储用户级别到本地
-function storeLevel(data){
-	localStorage.setItem('userlevel',data);
-}
-//存储通卡数据到本地
-function storeCard(data){
-	localStorage.setItem('cardInfo',data);
-}
-
+//清除数据
+//function clearData(name){
+//	localStorage.removeItem(name);
+//}
 //**********jquery*************
 
 $(function(){

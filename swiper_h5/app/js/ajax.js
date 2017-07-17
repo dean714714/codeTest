@@ -3,10 +3,12 @@ function getData(url,rqType,para,callback){
 	$.ajax({
 		type:rqType,
 		url:url,
-		async:false,
+		async:true,
 		dataType:'json',
 		data:para,
-		success:callback,
+		success:function(data){
+			callback(data);
+		},
 		error:function(){
 			alert("数据请求失败！请稍后重试！");
 		}
