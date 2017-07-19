@@ -1,90 +1,31 @@
 {
-	"devicetype": {
-		"type": [
-			{"type":"apple", "des":"苹果设备id" },
-			{"type":"canvas", "des":"帆布指纹" }
-		]
+	"userInfo": {
+		"userId": "EX1992",
+		"userName": "zzh",
+		"userlevel": "2",
+		"cardInfo": [123123,45345,3567365]
 	},
-	"devicecount": [
-		{
-			"count":"10"
-		}
-	],
-	"devices": {
-		"list": [
-		{
-			"devID":"97315b5f08b658d85",             
-			"devType":"apple",                        
-			"browser":"Safari",  
-			"model":"iphone7",  
-			"registerTime":"2017-06-04 15:36:40.0",
-			"lastTime":"2017-06-14 15:36:46.0",
-			"lastVisits":435,
-			"os":"ios"
-		},
-		{
-			"devID":"2394923794713ji09",             
-			"devType":"vivo",                        
-			"browser":"chrome",  
-			"model":"vivo X9",  
-			"registerTime":"2017-03-04 13:36:30.0",
-			"lastTime":"2017-04-10 19:31:34.2",
-			"lastVisits":234,
-			"os":"android"
-		},
-		{
-			"devID":"97315b5f08b658d85",             
-			"devType":"apple",                        
-			"browser":"Safari",  
-			"model":"iphone7",  
-			"registerTime":"2017-06-04 15:36:40.0",
-			"lastTime":"2017-06-14 15:36:46.0",
-			"lastVisits":435,
-			"os":"ios"
-		},
-		{
-			"devID":"2394923794713ji09",             
-			"devType":"vivo",                        
-			"browser":"chrome",  
-			"model":"vivo X9",  
-			"registerTime":"2017-03-04 13:36:30.0",
-			"lastTime":"2017-04-10 19:31:34.2",
-			"lastVisits":234,
-			"os":"android"
-		},
-		{
-			"devID":"97315b5f08b658d85",             
-			"devType":"apple",                        
-			"browser":"Safari",  
-			"model":"iphone7",  
-			"registerTime":"2017-06-04 15:36:40.0",
-			"lastTime":"2017-06-14 15:36:46.0",
-			"lastVisits":435,
-			"os":"ios"
-		},
-		{
-			"devID":"2394923794713ji09",             
-			"devType":"vivo",                        
-			"browser":"chrome",  
-			"model":"vivo X9",  
-			"registerTime":"2017-03-04 13:36:30.0",
-			"lastTime":"2017-04-10 19:31:34.2",
-			"lastVisits":234,
-			"os":"android"
-		}
-		]
-	},
-	"iDdevices": {
-		"list": [
-		{
-			"devID":"97315b5f08b658d85",             
-			"devType":"apple",                        
-			"browser":"Safari",  
-			"model":"iphone7",  
-			"registerTime":"2017-06-04 15:36:40.0",
-			"lastTime":"2017-06-14 15:36:46.0",
-			"lastVisits":435,
-			"os":"ios"
-		}]
+	"cardInfo": {
+		"bus_count": 100,	
+		"subway_count":40,	
+		"park_count":10,
+		"ride_time":86,	
+		"ride_km":1412,	
+		"westlake_round":6,
+		"fitness_count":32,	
+		"fitness_time":242,
+		"save_electricity":56.31,	
+		"online_recharge_count":4,
+		"online_recharge_money":350,
+		"medical_count":2,
+		"inter_room_settlement":5,
+		"save_wait_time":0,
+		"cost_money":12318.12,
+		"save_money":412.76,
+		"bus_cost":100.54,
+		"subway_cost":45.20,
+		"park_cost":10.15,
+		"save_co2":6524,
+		"save_rank":86
 	}
 }

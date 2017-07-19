@@ -8,7 +8,7 @@
 		<script type="text/javascript">
 			
 			var data = new Promise(function(resolve,reject){
-				getData('http://localhost:3000/devicetype','get',{},resolve)
+				getData('http://localhost:3000/userInfo','get',{},resolve)
 			})
 			data.then(function(value){
 				console.dir(value)

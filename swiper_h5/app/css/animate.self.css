@@ -108,6 +108,90 @@
 	-moz-animation: shakeKeep infinite linear;
 	animation: shakeKeep infinite linear;
 }
+/*持续抖动*/
+@-webkit-keyframes shake2Keep {
+	0%{
+		transform: translateX(0);
+	}
+	25%{
+		transform: translateX(-5px);
+	}
+	50%{
+		transform: translateX(0);
+	}
+	75%{
+		transform: translateX(5px);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}
+
+@keyframes shake2Keep {
+	0%{
+		transform: translateX(0);
+	}
+	25%{
+		transform: translateX(-5px);
+	}
+	50%{
+		transform: translateX(0);
+	}
+	75%{
+		transform: translateX(5px);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}
+
+.shake2Keep {
+	-webkit-animation: shake2Keep infinite linear;
+	-moz-animation: shake2Keep infinite linear;
+	animation: shake2Keep infinite linear;
+}
+/*持续抖动y轴*/
+@-webkit-keyframes shakeYkeep {
+	0%{
+		transform: translateY(0);
+	}
+	25%{
+		transform: translateY(5px);
+	}
+	50%{
+		transform: translateY(0);
+	}
+	75%{
+		transform: translateY(-5px);
+	}
+	100%{
+		transform: translateY(0);
+	}
+}
+
+@keyframes shakeYkeep {
+	0%{
+		transform: translateY(0);
+	}
+	25%{
+		transform: translateY(5px);
+	}
+	50%{
+		transform: translateY(0);
+	}
+	75%{
+		transform: translateY(-5px);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}
+
+.shakeYkeep {
+	-webkit-animation: shakeYkeep infinite linear;
+	-moz-animation: shakeYkeep infinite linear;
+	animation: shakeYkeep infinite linear;
+}
 /*小车左下角到右上角*/
 @-webkit-keyframes move45 {
 	0% {
