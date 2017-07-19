@@ -11,9 +11,25 @@ function promise(callback){
 }
 
 window.onload = function(){
-	//Pace.stop();
-	NProgress.done();
-	$mask.parentNode.removeChild($mask); //加载完成移除"加载中"的显示
+	addVal = 100;//终止index页面中的动画
+	new Promise(function(resolve,reject){
+		let addVal=0;
+		let $processW = parseInt($process.style.width);
+		let $valNum = parseInt($val.innerHTML);
+		(function loadingMove(){
+			if(addVal<=100-$processW){
+				$process.style.width = $processW+addVal+'%';
+				$val.innerHTML = $valNum+addVal+'%';
+				addVal++;
+				requestAnimationFrame(loadingMove)
+			}else{
+				resolve();
+			}
+		})();
+	}).then(function(value){
+		$mask.parentNode.removeChild($mask);
+	})
+	//$mask.parentNode.removeChild($mask); //加载完成移除"加载中"的显示
 	//$(".p3Ele1_blue_box").css('height','10rem');为柱形图设置高度
 	
 }
