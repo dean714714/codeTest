@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<script type="text/javascript">
+			
+			//Web Workers是一种新的实现异步编程的方式，js是单线程执行的语言，一般的异步编程无论是计时器,还是事件监听，或是promise,asyc，generate
+			//都是单线程的，异步任务被放在任务队列中，等待主线程执行完成再去执行队列中的任务，本质上还是一次只能干一件事，
+			//XMLHttpRquest是浏览器新开线程去请求资源的，但是回调函数却也是放在任务队列中的，也就是success:function(){...}
+			//的执行不是立即执行的，也是看任务队列里的event loop，轮到了才能执行。
+			//而Web Workers是浏览器新开线程在后台执行js任务，与上诉的异步编程有本质区别
+			
+			//关于js的单线程还是多线程看【javascript既然是单线程语言 ， 为什么会分主线程和消息线程(event loop) ?】
+			//——https://www.zhihu.com/question/35905242?sort=created
+			
+			//详情参见：【使用 Web Workers】https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers
+			
+			//一个主页显示，后台计算的计算机
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		<table class="cal" cellpadding="0" cellspacing="0">
+			<tr class="top">
+				<td class="topCell" colspan="2">
+					<div class="screen"></div>
+				</td>
+			</tr>
+			<tr class="con">
+				<td class="conL">
+					<div class="number">
+						<span>1</span>
+						<span>2</span>
+						<span>3</span>
+						<span>4</span>
+						<span>5</span>
+						<span>6</span>
+						<span>7</span>
+						<span>8</span>
+						<span>9</span>
+						<span>0</span>
+					</div>
+				</td>
+				<td class="conR">
+					<div class="opera">
+						
+					</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

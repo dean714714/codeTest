@@ -20,9 +20,9 @@
 			//fetch(input, init).then(function(response) {...})
 			//每次执行fetch()会返回一个promise对象，自动resolve(response),接下来就是promise得操作了
 			
-			//let myRequest = new Request("../000Picture_MaterialS/baozou1.jpg");
 			window.onload = function(){
-				//请求一张图片并显示再页面上
+				//参见【js中的二进制】下的【blob.html】
+				//请求一张图片并显示再页面上，在【ajax和xhr的学习】的【xhr level2】有采用xhr level2实现的例子。fetch是xhr level2和promise的结合
 				var myImage = document.createElement("img");
 				var myHeaders = new Headers();//请求头信息
 				myHeaders.append("Content-Type","image/jpeg");
