@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="common.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.list{
+				
+			}
+		</style>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+			//虚拟dom的实现参见其他文件，主要是new_files2.html,new_files3.html
+			var vm = new ZZH({
+				tag: "ul",
+				props: {
+					class: "list",
+				},
+				methods:{
+					
+				},
+				children: [//子集
+					{
+						tag: "input",
+						props: {
+							type: "text",
+							placeholder: "请输入信息",
+							value: ""
+						}
+					},
+					{
+						tag: "li",
+						children: "这是li1",
+						methods: {
+							click: function(){alert(this.innerHTML)}
+						}
+					},
+					{
+						tag: "li",
+						children: "这是li2",
+						methods: {
+							click: function(){alert(this.innerHTML)}
+						}
+					},
+					{
+						tag: "li",
+						children: "这是li3",
+						methods: {
+							click: function(){alert(this.innerHTML)}
+						}
+					}
+				]
+			})
+			//set&get操作
+			console.dir(vm.vm)
+			
+			//渲染真实dom并挂载页面中
+			document.body.appendChild(vm.render());
+		</script>
+</html>
