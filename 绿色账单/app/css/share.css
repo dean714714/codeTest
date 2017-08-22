@@ -1,0 +1,332 @@
+@charset "utf-8";
+/*global*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font: 10px/1.5 sans-serif, arial;
+	/*禁止ios端应用页面放大导致布局变形（如微信网页的可设置字体放大功能），安卓端需要设置js*/
+	-webkit-text-size-adjust: 100% !important; 
+	text-size-adjust: 100% !important; 
+	-moz-text-size-adjust: 100% !important; 
+}
+input{
+	border: none;
+	outline: none;
+}
+
+/*滚动字体*/
+.mt-number-animate{ 
+    position: relative;
+    top:-2px;
+    font-family: 'helvetica'; 
+    line-height:3.6rem; 
+    height: 3.6rem;/*设置数字显示高度*/; 
+    font-size: 3.6rem;/*设置数字大小*/ 
+    vertical-align: middle;
+    overflow: hidden; display: inline-block; 
+    position: relative; 
+    /*color:#fe4e36;*/
+}
+.mt-number-animate .mt-number-animate-dot{
+    width: 0.5rem;/*设置分割符宽度*/ 
+    line-height: 3.6rem;
+    float: left; 
+    text-align: center;
+}
+.mt-number-animate .mt-number-animate-dom{ 
+	width: 2rem;/*设置单个数字宽度*/ 
+	text-align: center; 
+	float: left; 
+	position: relative; 
+	top: 0;
+}
+.mt-number-animate .mt-number-animate-dom .mt-number-animate-span{ 
+	width: 100%; 
+	float: left;
+}
+/*********dataLoading**********/
+@keyframes loadingAni{
+	0%{
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+	100%{
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.dataLoading{
+	position:fixed;
+	width: 8rem;
+	height: 8rem;
+	background-color: rgba(0,0,0,0.6);
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nNDBweCcgaGVpZ2h0PSc0MHB4JyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCIgY2xhc3M9InVpbC1kZWZhdWx0Ij48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0ibm9uZSIgY2xhc3M9ImJrIj48L3JlY3Q+PHJlY3QgIHg9JzQ2LjUnIHk9JzQwJyB3aWR0aD0nNycgaGVpZ2h0PScyMCcgcng9JzUnIHJ5PSc1JyBmaWxsPScjZmZmZmZmJyB0cmFuc2Zvcm09J3JvdGF0ZSgwIDUwIDUwKSB0cmFuc2xhdGUoMCAtMzApJz4gIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9J29wYWNpdHknIGZyb209JzEnIHRvPScwJyBkdXI9JzFzJyBiZWdpbj0nLTFzJyByZXBlYXRDb3VudD0naW5kZWZpbml0ZScvPjwvcmVjdD48cmVjdCAgeD0nNDYuNScgeT0nNDAnIHdpZHRoPSc3JyBoZWlnaHQ9JzIwJyByeD0nNScgcnk9JzUnIGZpbGw9JyNmZmZmZmYnIHRyYW5zZm9ybT0ncm90YXRlKDMwIDUwIDUwKSB0cmFuc2xhdGUoMCAtMzApJz4gIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9J29wYWNpdHknIGZyb209JzEnIHRvPScwJyBkdXI9JzFzJyBiZWdpbj0nLTAuOTE2NjY2NjY2NjY2NjY2NnMnIHJlcGVhdENvdW50PSdpbmRlZmluaXRlJy8+PC9yZWN0PjxyZWN0ICB4PSc0Ni41JyB5PSc0MCcgd2lkdGg9JzcnIGhlaWdodD0nMjAnIHJ4PSc1JyByeT0nNScgZmlsbD0nI2ZmZmZmZicgdHJhbnNmb3JtPSdyb3RhdGUoNjAgNTAgNTApIHRyYW5zbGF0ZSgwIC0zMCknPiAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0nb3BhY2l0eScgZnJvbT0nMScgdG89JzAnIGR1cj0nMXMnIGJlZ2luPSctMC44MzMzMzMzMzMzMzMzMzM0cycgcmVwZWF0Q291bnQ9J2luZGVmaW5pdGUnLz48L3JlY3Q+PHJlY3QgIHg9JzQ2LjUnIHk9JzQwJyB3aWR0aD0nNycgaGVpZ2h0PScyMCcgcng9JzUnIHJ5PSc1JyBmaWxsPScjZmZmZmZmJyB0cmFuc2Zvcm09J3JvdGF0ZSg5MCA1MCA1MCkgdHJhbnNsYXRlKDAgLTMwKSc+ICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSdvcGFjaXR5JyBmcm9tPScxJyB0bz0nMCcgZHVyPScxcycgYmVnaW49Jy0wLjc1cycgcmVwZWF0Q291bnQ9J2luZGVmaW5pdGUnLz48L3JlY3Q+PHJlY3QgIHg9JzQ2LjUnIHk9JzQwJyB3aWR0aD0nNycgaGVpZ2h0PScyMCcgcng9JzUnIHJ5PSc1JyBmaWxsPScjZmZmZmZmJyB0cmFuc2Zvcm09J3JvdGF0ZSgxMjAgNTAgNTApIHRyYW5zbGF0ZSgwIC0zMCknPiAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0nb3BhY2l0eScgZnJvbT0nMScgdG89JzAnIGR1cj0nMXMnIGJlZ2luPSctMC42NjY2NjY2NjY2NjY2NjY2cycgcmVwZWF0Q291bnQ9J2luZGVmaW5pdGUnLz48L3JlY3Q+PHJlY3QgIHg9JzQ2LjUnIHk9JzQwJyB3aWR0aD0nNycgaGVpZ2h0PScyMCcgcng9JzUnIHJ5PSc1JyBmaWxsPScjZmZmZmZmJyB0cmFuc2Zvcm09J3JvdGF0ZSgxNTAgNTAgNTApIHRyYW5zbGF0ZSgwIC0zMCknPiAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0nb3BhY2l0eScgZnJvbT0nMScgdG89JzAnIGR1cj0nMXMnIGJlZ2luPSctMC41ODMzMzMzMzMzMzMzMzM0cycgcmVwZWF0Q291bnQ9J2luZGVmaW5pdGUnLz48L3JlY3Q+PHJlY3QgIHg9JzQ2LjUnIHk9JzQwJyB3aWR0aD0nNycgaGVpZ2h0PScyMCcgcng9JzUnIHJ5PSc1JyBmaWxsPScjZmZmZmZmJyB0cmFuc2Zvcm09J3JvdGF0ZSgxODAgNTAgNTApIHRyYW5zbGF0ZSgwIC0zMCknPiAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0nb3BhY2l0eScgZnJvbT0nMScgdG89JzAnIGR1cj0nMXMnIGJlZ2luPSctMC41cycgcmVwZWF0Q291bnQ9J2luZGVmaW5pdGUnLz48L3JlY3Q+PHJlY3QgIHg9JzQ2LjUnIHk9JzQwJyB3aWR0aD0nNycgaGVpZ2h0PScyMCcgcng9JzUnIHJ5PSc1JyBmaWxsPScjZmZmZmZmJyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTAgNTAgNTApIHRyYW5zbGF0ZSgwIC0zMCknPiAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0nb3BhY2l0eScgZnJvbT0nMScgdG89JzAnIGR1cj0nMXMnIGJlZ2luPSctMC40MTY2NjY2NjY2NjY2NjY3cycgcmVwZWF0Q291bnQ9J2luZGVmaW5pdGUnLz48L3JlY3Q+PHJlY3QgIHg9JzQ2LjUnIHk9JzQwJyB3aWR0aD0nNycgaGVpZ2h0PScyMCcgcng9JzUnIHJ5PSc1JyBmaWxsPScjZmZmZmZmJyB0cmFuc2Zvcm09J3JvdGF0ZSgyNDAgNTAgNTApIHRyYW5zbGF0ZSgwIC0zMCknPiAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0nb3BhY2l0eScgZnJvbT0nMScgdG89JzAnIGR1cj0nMXMnIGJlZ2luPSctMC4zMzMzMzMzMzMzMzMzMzMzcycgcmVwZWF0Q291bnQ9J2luZGVmaW5pdGUnLz48L3JlY3Q+PHJlY3QgIHg9JzQ2LjUnIHk9JzQwJyB3aWR0aD0nNycgaGVpZ2h0PScyMCcgcng9JzUnIHJ5PSc1JyBmaWxsPScjZmZmZmZmJyB0cmFuc2Zvcm09J3JvdGF0ZSgyNzAgNTAgNTApIHRyYW5zbGF0ZSgwIC0zMCknPiAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0nb3BhY2l0eScgZnJvbT0nMScgdG89JzAnIGR1cj0nMXMnIGJlZ2luPSctMC4yNXMnIHJlcGVhdENvdW50PSdpbmRlZmluaXRlJy8+PC9yZWN0PjxyZWN0ICB4PSc0Ni41JyB5PSc0MCcgd2lkdGg9JzcnIGhlaWdodD0nMjAnIHJ4PSc1JyByeT0nNScgZmlsbD0nI2ZmZmZmZicgdHJhbnNmb3JtPSdyb3RhdGUoMzAwIDUwIDUwKSB0cmFuc2xhdGUoMCAtMzApJz4gIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9J29wYWNpdHknIGZyb209JzEnIHRvPScwJyBkdXI9JzFzJyBiZWdpbj0nLTAuMTY2NjY2NjY2NjY2NjY2NjZzJyByZXBlYXRDb3VudD0naW5kZWZpbml0ZScvPjwvcmVjdD48cmVjdCAgeD0nNDYuNScgeT0nNDAnIHdpZHRoPSc3JyBoZWlnaHQ9JzIwJyByeD0nNScgcnk9JzUnIGZpbGw9JyNmZmZmZmYnIHRyYW5zZm9ybT0ncm90YXRlKDMzMCA1MCA1MCkgdHJhbnNsYXRlKDAgLTMwKSc+ICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSdvcGFjaXR5JyBmcm9tPScxJyB0bz0nMCcgZHVyPScxcycgYmVnaW49Jy0wLjA4MzMzMzMzMzMzMzMzMzMzcycgcmVwZWF0Q291bnQ9J2luZGVmaW5pdGUnLz48L3JlY3Q+PC9zdmc+");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 60% 60%; 
+	border-radius: 1rem;
+	z-index: 1000;
+	left: 50%;
+	top: 50%;
+	margin-left: -4rem;
+	margin-top: -4rem;
+}
+.loadingAni{
+	animation: loadingAni 0.5s ease;
+}
+/*********提示框**********/
+.mask{
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+	z-index: 1000;
+}
+.mask .formList{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+@keyframes actionAni{
+	0%{
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+	100%{
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.actionAni{
+	animation: actionAni 0.1s ease;
+}
+.action{
+	position: absolute;
+	width: 80%;
+	height: 30%;
+	background: #FFFFFF;
+	border-radius: 0.4rem;
+	left: 10%;
+	top: 35%;
+	overflow: hidden;
+}
+.actionInfo{
+	width: 100%;
+	padding: 1.5rem;
+	font-size: 1.5rem;
+	color: #333;
+	text-align: justify;
+}
+.actionBtn{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	text-align: center;
+	color: #4dbe56;
+	letter-spacing: 0.2rem;
+	font-size: 1.6rem;
+	line-height: 4.8rem;
+	background: #fafafa;
+}
+.actionBtn:active{
+	background: #f3f3f3;
+}
+/*用于slide设定屏幕高度后的样式设定*/
+
+html,
+body,
+.swiper-container,
+.swiper-slide {
+	height: 100%;
+}
+
+body {
+	background: #111 url(../img/bg_back.png) no-repeat center center;
+	background-size: 100% 100%;
+	/*开启硬件加速*/
+	webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	/*text-align: center;*/
+}
+
+.swiper-slide {
+	position: relative;
+	background: transparent url(../img/bg_paper.png) no-repeat center center;
+	background-size: 100% 100%;
+	overflow: hidden;
+	/*text-align: center;*/
+}
+
+/********go***********/
+.shareEle{
+	font-size: 1.6rem;
+	color: #60adac;
+	line-height: 3.6rem;
+	margin: 5.3rem 0 0 3.5rem;
+}
+.shareEle .counter,.shareEle .sharePer{
+	font-size: 3.6rem;
+	color: #f37810;
+	font-weight: bold;
+}
+.shareEle span{
+	vertical-align: middle;
+}
+.counter{
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+
+@media only screen and (max-width: 320px) {
+	.shareEle2{
+		position: relative;
+		width: 12rem !important;
+		height: 12rem !important;
+		margin: 6.5rem auto 0 auto;
+	}
+}
+.shareEle2{
+	position: relative;
+	width: 15rem;
+	height: 15rem;
+	margin: 6.5rem auto 0 auto;
+}
+.shareEle2 .counter{
+	font-size: 12px;
+	/*font-weight: normal;*/
+}
+.shareEle2 .counter .mt-number-animate{
+	width: auto !important;
+	font-size: 1.2rem !important;
+	line-height: 2rem !important;
+	height: 2rem;
+}
+.shareEle2 .counter .mt-number-animate .mt-number-animate-dot{
+    width: 0.1rem;/*设置分割符宽度*/ 
+    line-height: 2rem;
+    float: left; 
+    text-align: center;
+}
+.shareEle2 .counter .mt-number-animate .mt-number-animate-dom{ 
+	width: 0.8rem;/*设置单个数字宽度*/ 
+	text-align: center; 
+	float: left; 
+	position: relative; 
+	top: 0;
+}
+.share_img1{
+	width: 100%;
+	height: 100%;
+}
+.shareDot{
+	position: absolute;
+	font-size: 1.2rem;
+	line-height: 2rem;
+	width: 6rem;
+	color: #60adac;
+	text-align: left;
+}
+.shareDot::before{
+	position: absolute;
+	display: inline-block;
+	white-space: nowrap;
+	font-size: 1.2rem;
+	color: #60adac;
+	line-height: 1.6rem;
+	padding-left: 2.0rem;
+	left: -2rem;
+	top: -1.6rem;
+}
+.share_cx{
+	top: -20%;
+	left: 40%;
+}
+.share_cx::before{
+	content: '绿色出行';
+	background: url(../img/share_cx.png) no-repeat left center;
+	background-size: 1.6rem 1.6rem;
+}
+.share_xf{
+	top: 25%;
+	left: 120%;
+}
+.share_xf::before{
+	content: '绿色消费';
+	background: url(../img/share_xf.png) no-repeat left center;
+	background-size: 1.6rem 1.6rem;
+}
+.share_js{
+	bottom: 10%;
+	left: 120%;
+}
+.share_js::before{
+	content: '校园健身';
+	background: url(../img/share_js.png) no-repeat left center;
+	background-size: 1.6rem 1.6rem;
+}
+.share_dl{
+	bottom: -35%;
+	left: 40%;
+}
+.share_dl::before{
+	content: '节省电量约';
+	background: url(../img/share_dl.png) no-repeat left center;
+	background-size: 1.6rem 1.6rem;
+}
+.share_pd{
+	bottom: 10%;
+	left: -45%;
+}
+.share_pd::before{
+	content: '节省排队时间约';
+	background: url(../img/share_pd.png) no-repeat left center;
+	background-size: 1.6rem 1.6rem;
+}
+.share_zxf{
+	bottom: 15%;
+	left: -45%;
+}
+.share_zxf::before{
+	content: '本月共消费';
+	background: url(../img/share_zxf.png) no-repeat left center;
+	background-size: 1.6rem 1.6rem;
+}
+.share_jies{
+	top: 25%;
+	left: -45%;
+}
+.share_jies::before{
+	content: '本月节省';
+	background: url(../img/share_zxf.png) no-repeat left center;
+	background-size: 1.6rem 1.6rem;
+}
+.share_btn{
+	width: 80%;
+	height: 4.5rem;
+	line-height: 4.5rem;
+	margin:10rem 0 0 10%;
+	background: #4dbe56;
+	color: #FFF;
+	font-size: 1.6rem;
+	text-align: center;
+	border-radius: 2.5rem;
+	-webkit-border-radius: 2.5rem;
+	-moz-border-radius: 2.5rem;
+	box-shadow: 0 0.35rem 0 #248e2c;
+	-webkit-box-shadow: 0 0.35rem 0 #248e2c;
+	-moz-box-shadow: 0 0.35rem 0 #248e2c;
+}
