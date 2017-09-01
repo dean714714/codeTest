@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			table{
+				border-collapse: collapse;
+			}
+			thead td{
+				font-weight: bold;
+				background: darkolivegreen;
+				color: #fff;
+			}
+			td{
+				text-align: center;
+				border: 1px solid #000;
+				font: 16px/1.5 "微软雅黑";
+				padding: 10px;
+			}
+			.action{
+				color: green;
+				font-size: 20px;
+				font-weight: bold;
+			}
+		</style>
+		<script src="js/lib/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/lib/jquery.table2excel.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn").click(function(){
+					$("#table").table2excel({
+			            exclude: ".noExl",
+			            name: "Excel Document Name",
+			            filename: "myFileName",
+			            fileext: ".xls",
+			            exclude_img: true,
+			            exclude_links: true,
+			            exclude_inputs: true
+			        });
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<input  type="button" name="" id="btn" value="导出"/>
+		<table border="0" cellspacing="0" cellpadding="0" id="table">
+			<thead>
+				<tr>
+					<td><span class="action">mygod</span></td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td rowspan="2">hello</td>
+					<td>my name</td>
+					<td>is</td>
+					<td>Dean</td>
+				</tr>
+				<tr>
+					<td>pingo</td>
+					<td>pingo</td>
+					<td>pingo</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

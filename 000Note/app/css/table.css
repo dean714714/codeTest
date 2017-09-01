@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+/*导出到excel的样式只能通过一个选择器一个样式的写法,不支持子级选择器,如a b{}*/
+/*还有不支持display:none*/
+td {
+	border: 1px solid #eaeaea;
+	padding: 0 10px;
+	background: #ffffff;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.titleTd{
+	font-weight: bold;
+	color: #666;
+	height: 32px;
+	background: #fafafa;
+}
+
+.conTd{
+	padding: 10px;
+	line-height: 1.5;
+}
+.tTitle {
+	line-height: 36px !important;
+	height: 36px !important;
+	background: #01a661 !important;
+	border: 1px solid #01a661 !important;
+	padding: 0 20px !important;
+	font-weight: bold !important;
+	color: #ffffff !important;
+	text-align: center !important;
+}
+.noData {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: #ccc;
+  font-style: italic;
+  display: block;
+  text-align: center;
+  margin: 50px auto;
+ }
+ 
