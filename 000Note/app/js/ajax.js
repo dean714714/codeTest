@@ -1,28 +1,26 @@
  function IEVersion() {//判断ie版本
  	var browser=navigator.appName
-	var b_version=navigator.appVersion
-	var version=b_version.split(";");
-	var trim_Version=version[1].replace(/[ ]/g,"");
 	if(browser!="Microsoft Internet Explorer"){
-		return false;
-	}else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE6.0")
-	{
-		return 6;
-	}
-	else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0")
-	{
-		return 7;
-	}
-	else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0")
-	{
-		return 8;
-	}
-	else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE9.0")
-	{
-		return 9;
+		return false;//不是ie浏览器
+	}else{
+		var b_version=navigator.appVersion
+		var version=b_version.split(";");
+		var trim_Version=version[1].replace(/[ ]/g,"");
+		if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE6.0"){
+			return 6;
+		}
+		else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0"){
+			return 7;
+		}
+		else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0"){
+			return 8;
+		}
+		else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE9.0"){
+			return 9;
+		}
 	}
  } 
-alert(IEVersion())
+
 function addURLParam(url, name, value) {
     url += (url.indexOf("?") == -1) ? "?" : "&";
     url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
@@ -32,7 +30,8 @@ function ieRequest(url,rqType,para,callback) {
     var xdr = new XDomainRequest();
     xdr.onload = function() {
         //readyStateChanged(xdr);
-        //console.dir(JSON.parse(xdr.responseText))
+        //console.dir(JSON.parse(xdr.responseText));
+        tip(false);
         callback(JSON.parse(xdr.responseText));
     }
     var result = url;
@@ -69,8 +68,8 @@ function getData(url,rqType,para,callback){//获取数据
 	//加载提示
 	tip(true);
 	jQuery.support.cors=true;//ie8,9不支持服务器端设置CORS,加这句就行
-	alert(IEVersion())
-	if(IEVersion()*1<10){
+	if(IEVersion()&&IEVersion()<10){
+		alert(IEVersion())
 		ieRequest(url,rqType,para,callback);
 	}else{
 		$.ajax({
