@@ -26,22 +26,6 @@ function addURLParam(url, name, value) {
     url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
     return url;
 }
-function ieRequest(url,rqType,para,callback) {
-    var xdr = new XDomainRequest();
-    xdr.onload = function() {
-        //readyStateChanged(xdr);
-        //console.dir(JSON.parse(xdr.responseText));
-        tip(false);
-        callback(JSON.parse(xdr.responseText));
-    }
-    var result = url;
-    for (var i in para) {
-        result = addURLParam(result, i, para[i]);
-    }
-    console.log(result);
-    xdr.open("get", result);
-    xdr.send(null);
-}
 
 var $load = document.createElement('div');
 var $div = document.createElement('div');
@@ -64,14 +48,33 @@ function errTip(){
 	document.body.appendChild($div)
 }
 
+function ieRequest(url,rqType,para,callback) {//针对IE10以下IE的跨越请求用XDomainRequest
+    var xdr = new XDomainRequest();
+    xdr.onload = function() {
+        //readyStateChanged(xdr);
+        //console.dir(JSON.parse(xdr.responseText));
+        tip(false);
+        callback(JSON.parse(xdr.responseText));
+    }
+    xdr.onerror = function() {
+        errTip();
+    }
+    var result = url;
+    for (var i in para) {
+        result = addURLParam(result, i, para[i]);
+    }
+    console.log(result);
+    xdr.open("get", result);
+    xdr.send(null);
+}
+
 function getData(url,rqType,para,callback){//获取数据
 	//加载提示
 	tip(true);
 	jQuery.support.cors=true;//ie8,9不支持服务器端设置CORS,加这句就行
-	if(IEVersion()&&IEVersion()<10){
-		alert(IEVersion())
+	if(IEVersion()&&IEVersion()<10){//如果是IE浏览器且版本在10以下
 		ieRequest(url,rqType,para,callback);
-	}else{
+	}else{//其他浏览器
 		$.ajax({
 			type:rqType,
 			url:url,
