@@ -26,7 +26,7 @@
 				context.arc(200,70,50,0,Math.PI*2,true);//(x, y, radius, starAngle,endAngle, anticlockwise),表示圆心的x,y轴位置，半径，开始角度，结束角度，旋转方向（Math.PI表示一个π）
 				context.fill();
 				context.closePath();//注意这里如果不关闭路径，且下方没有重新开始路径的话，路径的绘制会接着上一个路径开始，当然如果有这个需求也是极好的
-				
+				//context.clearRect(0,0,800,600);//后面画的是在前面画的上一层，所以此时清除整个画布的会是之前画的
 				//绘制一个空心整圆
 				context.beginPath();
 				context.arc(260,70,30,0,Math.PI*2,true);
