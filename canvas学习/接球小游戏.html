@@ -7,7 +7,7 @@
 	<title>Document</title>
 </head>
 <body>
-	<canvas id="can" width="800" height="800" ></canvas>
+	<canvas id="can" width="400" height="400" ></canvas>
 </body>
 <script type="text/javascript">
 	
@@ -73,13 +73,11 @@
 				addY = -addY;
 			}
 		}
-		function passBall(position){//失败事件——穿过画布
-			if(position==='x'){
-				ballX = cW-ballX;
-			}
-			if(position==='y'){
-				ballY = cH-ballY;
-			}
+		function passBall(){//失败事件——穿过画布
+
+				ballX = (cW-ballR*2)/2;
+				ballY = (cH-ballR*2)/2;
+
 		}
 		
 		function listenCollison(suc,err){//监听碰撞
@@ -95,23 +93,22 @@
 					console.log("纵轴反弹成功")
 				}
 			}
-			if(!(ballX>=qubeX-ballR*2&&ballX<=qubeX+qubeH)||!(ballY>=qubeY-ballR*2&&ballY<=qubeY+qubeW)){
-//				if(ballX<=qubeW||ballX>=cW-qubeW-ballR*2){
-//					err('x');
-//					console.log("纵轴出界了！")
-//				}
-//				if(ballY<=qubeW||ballY>=cH-qubeW-ballR*2){
-//					err('y');
-//					console.log("横轴出界了！")
-//				}
-				console.log("不在范围内")
+			if(!(ballX>=qubeX-ballR*2&&ballX<=qubeX+qubeH)&&!(ballY>=qubeY-ballR*2&&ballY<=qubeY+qubeH)){
+				if(ballX<=qubeW||ballX>=cW-qubeW-ballR*2){
+					err();
+					console.log("纵轴出界了！")
+				}
+				if(ballY<=qubeW||ballY>=cH-qubeW-ballR*2){
+					err();
+					console.log("横轴出界了！")
+				}
 			}
 			
 		}
 		
 		function emit(){
 			addX = random();
-			addY = 0;
+			addY = random();
 			(function go(){
 				listenCollison(backBall,passBall);
 				//backBall();
