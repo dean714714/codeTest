@@ -1,12 +1,12 @@
 {
 	"departappday": {
-		"code": "出错码",
+		"code": "100",
 		"data":[                                    
 			{
 				"depart":"其他D0000",               
 				"data":[
 					{                                   
-						"appid":"201706140000",      
+						"appid":"0201706140000",      
 						"appname":"市民卡服务",  
 						"businessid":"appCente",                 
 						"active":[
@@ -167,7 +167,7 @@
 		]
 	},
 	"activeyear":{
-		"code":"错误码",
+		"code":"100",
 		"yearlist":["2017","2018"]
 	}
 }

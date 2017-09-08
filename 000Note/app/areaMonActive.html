@@ -8,10 +8,10 @@
 		<link rel="stylesheet" type="text/css" href="css/table.css"/>
 		<script type="text/javascript">
 			var dateUrl = "http://192.168.1.9:8080/ReportPlatform/activeyear";
-			var ddaUrl = "http://192.168.1.9:8080/ReportPlatform/departappday";
-			var para_yearlist = 'departappday';//获取年份的参数
-			var defalutCol = 4;//表头固定部门列数
-			var title = '部门模块日活';
+			var ddaUrl = "http://192.168.1.9:8080/ReportPlatform/areaappmonth";
+			var para_yearlist = 'areaappmonth';//获取年份的参数
+			var defalutCol = 5;//表头固定部门列数
+			var title = '区域模块月活';
 			//以下本地测试地址
 //			var dateUrl = "http://localhost:3000/activeyear";
 //			var ddaUrl = "http://localhost:3000/departappday";
@@ -23,9 +23,9 @@
 				<select name="" ms-duplex="@yearSel">
 					<option ms-for="(key,item) in yearlist">{{@item}}</option>
 				</select>
-				<select name="" ms-duplex="@monthSel">
+				<!--<select name="" ms-duplex="@monthSel">
 					<option ms-for="(key,item) in monthlist">{{@item}}</option>
-				</select>
+				</select>-->
 			</span>
 			<span class="btn_action" ms-on-click="@search" style="margin-left: 10px;float: left;">查 询</span>
 			<span class="btn_action" ms-on-click="@toExcel('table')" style="margin-left: 20px;float: right;">导出Excel</span>
@@ -41,10 +41,11 @@
 				</thead>
 				<thead>
 					<tr>
-						<td class="titleTd">部门</td>
-						<td class="titleTd">应用编号</td>
-						<td class="titleTd">应用名称</td>
-						<td class="titleTd">业务板块Id</td>
+						<td class="titleTd" >区域</td>
+						<td class="titleTd" >应用编号</td>
+						<td class="titleTd" >应用名称</td>
+						<td class="titleTd" >部门</td>
+						<td class="titleTd" >业务板块Id</td>
 						<td class="titleTd" ms-for="(key,item) in @active">{{@item.date}}</td>
 					</tr>
 				</thead>
@@ -57,9 +58,10 @@
 				</tbody>
 				<tbody ms-for="(key,item) in data">
 					<tr ms-for="(i,o) in item.data">
-						<td class="conTd" ms-visible="i===0?true:false" ms-attr="{rowspan: item.data.length}">{{@item.depart}}</td>
+						<td class="conTd" ms-visible="i===0?true:false" ms-attr="{rowspan: item.data.length}">{{@item.area}}</td>
 						<td class="conTd" style="mso-number-format:0;">{{@o.appid}}</td>
 						<td class="conTd" >{{@o.appname}}</td>
+						<td class="conTd" >{{@o.department}}</td>
 						<td class="conTd" >{{@o.businessid}}</td>
 						<td	class="conTd" ms-for="(index,value) in o.active">{{@value.number}}</td>
 					</tr>
@@ -68,9 +70,8 @@
 		</div>
 	</body>
 	<script src="js/lib/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/lib/jquery.xdomainrequest.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/lib/avalon.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/lib/jquery.table2excel.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/dailyActive.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/monActive.js" type="text/javascript" charset="utf-8"></script>
 </html>

@@ -13,14 +13,14 @@ var ddaVm = avalon.define({
 	contentShow: false,
 	$computed: {
 		active: function(){//月份或日的表头和值
-			var d = ddaVm.data.length>0?ddaVm.data[0].data[0].active:[];
+			var d = ddaVm.data.length>0?ddaVm.data[0].active:[];
 			return d;
 		},
 		titleName: function(){
-			return "部门模块日活("+ddaVm.yearSel+"年"+ddaVm.monthSel+"月)";
+			return title+"("+ddaVm.yearSel+"年"+ddaVm.monthSel+"月)";
 		},
 		setCol: function(){
-			return ddaVm.data.length===0?4:4+ddaVm.data[0].data[0].active.length;
+			return ddaVm.data.length===0?defalutCol:defalutCol+ddaVm.data[0].active.length;
 		}
 	},
 	toExcel: function(obj){
@@ -44,7 +44,7 @@ var ddaVm = avalon.define({
 })
 
 ddaVm.$watch('onReady',function(){//初始化
-	getData(dateUrl,'get',{"type":"departappday"},function(data){
+	getData(dateUrl,'get',{"type":para_yearlist},function(data){
 		ddaVm.yearlist = data.yearlist.length>0?data.yearlist:[new Date().getFullYear()];
 		ddaVm.yearSel = ddaVm.yearlist[0];//日期——年，默认
 		ddaVm.monthSel = new Date().getMonth()+1<10?"0"+(new Date().getMonth()+1):new Date().getMonth()+1;//日期——月，默认

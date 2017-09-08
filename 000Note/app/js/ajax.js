@@ -21,60 +21,18 @@
 	}
  } 
 
-function addURLParam(url, name, value) {
-    url += (url.indexOf("?") == -1) ? "?" : "&";
-    url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
-    return url;
-}
-
-var $load = document.createElement('div');
-var $div = document.createElement('div');
-function tip(state){
-	switch (state){
-		case true:
-			$load.innerHTML = "加载中，请稍后...";
-			$load.style.cssText = "width:160px;line-height:60px;text-align:center;color:#fff;background:#000;position: fixed;left: 50%;top: 50%;margin: -40px 0 0 -80px;z-index:100;border-radius: 10px;"
-			document.body.appendChild($load);
-			break;
-		case false:
-			$load.parentNode.removeChild($load);//关闭加载提示
-			break;
-	}
-}
-function errTip(){
-	$div.innerHTML = "请求失败了，请刷新或稍后重试~";
-	$div.style.cssText = "font-size: 24px;font-weight: bold;letter-spacing: 4px;color: #ccc;font-style: italic;display: block;text-align: center;margin: 100px auto;"
-	document.body.innerHTML = "";
-	document.body.appendChild($div)
-}
-
-function ieRequest(url,rqType,para,callback) {//针对IE10以下IE的跨越请求用XDomainRequest
-    var xdr = new XDomainRequest();
-    xdr.onload = function() {
-        //readyStateChanged(xdr);
-        //console.dir(JSON.parse(xdr.responseText));
-        tip(false);
-        callback(JSON.parse(xdr.responseText));
-    }
-    xdr.onerror = function() {
-        errTip();
-    }
-    var result = url;
-    for (var i in para) {
-        result = addURLParam(result, i, para[i]);
-    }
-    console.log(result);
-    xdr.open("get", result);
-    xdr.send(null);
-}
 
 function getData(url,rqType,para,callback){//获取数据
 	//加载提示
-	tip(true);
+	var $load = document.createElement('div');
+	$load.innerHTML = "加载中，请稍后...";
+	$load.style.cssText = "width:160px;line-height:60px;text-align:center;color:#fff;background:#000;position: fixed;left: 50%;top: 50%;margin: -40px 0 0 -80px;z-index:100;border-radius: 10px;"
+	document.body.appendChild($load);
+	
 	jQuery.support.cors=true;//ie8,9不支持服务器端设置CORS,加这句就行
-	if(IEVersion()&&IEVersion()<10){//如果是IE浏览器且版本在10以下
-		ieRequest(url,rqType,para,callback);
-	}else{//其他浏览器
+//	if(IEVersion()&&IEVersion()<10){//如果是IE浏览器且版本在10以下
+//		ieRequest(url,rqType,para,callback);
+//	}else{//其他浏览器
 		$.ajax({
 			type:rqType,
 			url:url,
@@ -82,15 +40,27 @@ function getData(url,rqType,para,callback){//获取数据
 			//dataType:'json',
 			data:para,
 			success:function(data){
+				if(data.code==='103'){//系统出错处理机制
+					var $div = document.createElement('div');
+					$div.innerHTML = "系统内部出错，请刷新或稍后重试~";
+					$div.style.cssText = "font-size: 24px;font-weight: bold;letter-spacing: 4px;color: #ccc;font-style: italic;display: block;text-align: center;margin: 100px auto;"
+					document.body.innerHTML = "";
+					document.body.appendChild($div);
+					return;
+				}
 				callback(data);
-				tip(false);//关闭加载提示
+				$load.parentNode.removeChild($load);//关闭加载提示
 			},
 			error:function(a){
 				console.log(a)
-				errTip();
+				var $div = document.createElement('div');
+				$div.innerHTML = "请求失败了，请刷新或稍后重试~";
+				$div.style.cssText = "font-size: 24px;font-weight: bold;letter-spacing: 4px;color: #ccc;font-style: italic;display: block;text-align: center;margin: 100px auto;"
+				document.body.innerHTML = "";
+				document.body.appendChild($div)
 			}
 		});
-	}
+	//}
 	
 	
 	
