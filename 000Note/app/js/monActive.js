@@ -37,8 +37,18 @@ var ddaVm = avalon.define({
 	},
 	search: function(){
 		getData(ddaUrl,'get',{"year": ddaVm.yearSel},function(data){
-			ddaVm.data = data.data||[];
-			console.log(ddaVm.data.$model);
+			if(!data.data)return;
+			var newArr = [];
+			for(var i=0;i<data.data.length;i++){
+				(function(i){
+					setTimeout(function(){
+						newArr.push(data.data[i])
+						//console.log(newArr)
+						ddaVm.data = newArr;
+					},100*i)
+				})(i)
+			}
+			//console.log(ddaVm.data.$model);
 		})
 	}
 })
@@ -49,8 +59,18 @@ ddaVm.$watch('onReady',function(){//初始化
 		ddaVm.yearSel = ddaVm.yearlist[0];//日期——年，默认
 		//ddaVm.monthSel = new Date().getMonth()+1<10?"0"+(new Date().getMonth()+1):new Date().getMonth()+1;//日期——月，默认
 		getData(ddaUrl,'get',{"year": ddaVm.yearSel},function(data){
-			ddaVm.data = data.data||[];
-			console.log(ddaVm.data.$model)//$model返回数据类型的对象而不是访问器类型
+			if(!data.data)return;
+			var newArr = [];
+			for(var i=0;i<data.data.length;i++){
+				(function(i){
+					setTimeout(function(){
+						newArr.push(data.data[i])
+						//console.log(newArr)
+						ddaVm.data = newArr;
+					},100*i)
+				})(i)
+			}
+			//console.log(ddaVm.data.$model)//$model返回数据类型的对象而不是访问器类型
 			ddaVm.contentShow = true;
 		})
 	})
