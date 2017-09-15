@@ -47,13 +47,17 @@
 		canvas.addEventListener('mousemove',function(e){//产生矩形运动
 			recX = e.offsetX;
 			recY = e.offsetY;
+			shotDotAni(recY);
 		});
-		;(function shotDotAni(y){//产生小方块运动
-			var shotYdefalut = recY;
+		
+		function shotDotAni(y){//产生小方块运动
+			//console.log(y)
 			shotX = recX;
-			shotY = recY-1;
-			requestAnimationFrame(shotDotAni)
-		})(recY)
+			shotY = y;
+			requestAnimationFrame(function(){
+				shotDotAni(shotY+1);
+			});
+		};
 		
 		;(function fresh(){//绘制元素放在这个刷新画布的函数内，来统一刷新频率.属性变化由其他计时器来改变，以此产生动画效果
 			clear();
