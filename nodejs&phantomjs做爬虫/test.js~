@@ -1,0 +1,32 @@
+
+var program = require('commander');
+var csv = require('csv');
+var fs = require('fs');
+var inquirer = require('inquirer');
+
+program
+  .version('0.0.1')
+  .option('-l, --list [list]', 'list of customers in CSV file')
+  .parse(process.argv)
+
+var questions = [
+
+	{
+		type: 'input',
+		name: '搜索关键字'，
+		message: '请输入您想搜索的图片名称'，
+		default: false
+	},
+	
+	{
+        type: 'list',
+        name: '选择搜索尺寸，9：特大尺寸；3：大尺寸；2：中尺寸；1：小尺寸'，
+		message: ’你想搜索多大的图片'
+		choices: [9,3,2,1]
+     }
+
+]
+
+inquirer.prompt(questions).then(function(answers){
+	console.log('\n你选择了：');
+})
