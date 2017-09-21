@@ -8,14 +8,14 @@ var rp = require('request-promise');
 
 //配置下载选项
 var _size = 9;//不写：全部尺寸；9：特大尺寸；3：大尺寸；2：中尺寸；1：小尺寸
-var _Word = encodeURIComponent('美女');//查询关键词,一定转成ASCII编码不然会报The header content contains invalid characters
+var _Word = encodeURIComponent('娜美');//查询关键词,一定转成ASCII编码不然会报The header content contains invalid characters
 var _time = new Date().getTime()+'';//每次查询添加时间挫
 var _pn = 90;
 var _rn = 30;
 
 //下载连接（采用函数方式便于每次调用采用不同时间挫）
 function searchUrl(){
-	return 'http://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&ct=201326592&is=&fp=result&queryWord='+_Word+'&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=&z='+_size+'&ic=&word='+_Word+'&s=&se=&tab=&width=&height=&face=&istype=&qc=&nc=1&fr=&pn='+_pn+'&rn='+_rn+'&gsm=14a&'+_time+'=';
+	return 'http://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&ct=201326592&is=&fp=result&queryWord='+_Word+'&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=&z='+_size+'&ic=&word='+_Word+'&s=&se=&tab=&width=&height=&face=&istype=&qc=&nc=1&fr=&pn='+_pn+'&rn='+_rn+'&gsm='+(Math.ceil(Math.random())*200).toString(16)+'&'+_time+'=';
 }
 
 //请求GO
