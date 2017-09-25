@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="cas" width="500" height="500" style="margin: 50px;"></canvas>
+	</body>
+	<script type="text/javascript">
+		
+		var $cas = document.getElementById('cas');
+		var cxt = $cas.getContext('2d');
+		
+		//渐变色
+		var lg = cxt.createLinearGradient(0,0,0,500);//渐变色的起终位置
+		lg.addColorStop(0,'#ff8800');//渐变色的范围和色值
+		//lg.addColorStop(0.5,'#00ff00');
+		lg.addColorStop(1,'#ffcc00');
+		
+		//背景
+		function drawBg(){
+			cxt.fillStyle = lg;
+			cxt.fillRect(0,0,500,500);
+		}
+		
+		//透明圆
+		function drawArc(bgCl,borCl,radii,centerX,centerY,scaleX,scaleY){
+			cxt.save();//保存初始画布，不然每次画都会在上次缩放基础上进行缩放
+			cxt.fillStyle = bgCl;
+			cxt.strokeStyle = borCl;
+			cxt.lineWidth = 2;
+			cxt.scale(scaleX,scaleY);
+			cxt.beginPath();
+			cxt.arc(250/scaleX,250/scaleY,radii,0,Math.PI*2,true);//(x, y, radius, starAngle,endAngle, anticlockwise),表示圆心的x,y轴位置，半径，开始角度，结束角度，旋转方向（Math.PI表示一个π）
+			cxt.fill();
+			cxt.closePath();
+			cxt.restore();//重置上次保存的画布
+		}
+		
+		;(function fresh(scaleX,scaleY,pi){
+			//console.log(scaleX)
+			
+			scaleX = Math.sin(pi*Math.PI)
+			console.log(scaleX)
+			drawBg();
+			drawArc('rgba(255,255,255,0.6)','rgba(255,255,255,0.9)',80,250,250,scaleX,scaleY);
+			requestAnimationFrame(fresh.bind(this,scaleX,scaleY,pi*1.1));
+			
+		})(1,1,1)
+		
+		
+	</script>
+</html>

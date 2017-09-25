@@ -15,15 +15,36 @@ var _pn = 90;
 var _rn = 30;
 
 //下载连接（采用函数方式便于每次调用采用不同时间挫）
-var searchUrl = 'http://www.99mm.me/';
-//var searchUrl = 'https://www.zhainanfulishe.net/tag/rosi';
-
+var searchUrl = 'http://www.rosmm.com';
 
 //请求GO
-var linkDB = [];
+var linkDB = [],k=0,deepLevel=3;//deepLevel表示链接层级深度
 (function getLink(url){
-	var encodeUrl = encodeURI(url);
-	request(encodeUrl,function(error,response,body){
+	//console.log(url)
+	if(url.split("level=")[1]){
+		k = url.split("level=")[1]*1+1;
+	}
+	if(url.split("level=")[1]*1>=deepLevel){
+		//console.log(linkDB)
+		fs.writeFile('./img/img.txt',JSON.stringify(linkDB),function(err){
+			if(err){
+				console.log("———下载失败！")
+			}else{
+				console.log("———下载成功！")
+			}
+		});
+		return;
+	}
+	var options = {
+		agent: false,
+		uri: encodeURI(url),
+		encoding: null,
+		headers: {
+			"Referer": searchUrl
+		}
+	};
+	//var encodeUrl = encodeURI(url);
+	request(options,function(error,response,body){
 		//console.log(response.statusCode);
 		if(!error&&response.statusCode===200){
 			var htmlStr = body;
@@ -34,42 +55,40 @@ var linkDB = [];
 				var obj = {aTag:[],imgTag:[]};
 				for(var i=0;i<arguments.length;i++){
 					arguments[i].each(function(){
-						if(/99mm/.test($(this).attr('href'))||/99mm/.test($(this).attr('src'))){
+						if(/rosimm/.test($(this).attr('href'))||/rosimm/.test($(this).attr('src'))){
 							//console.log($(this).attr('href')||$(this).attr('src'));
 							if(/http/.test($(this).attr('href'))||/http/.test($(this).attr('src'))){
 								if((typeof $(this).attr('href'))!=='undefined'){
-									obj['aTag'].push($(this).attr('href'));//+"?"+new Date().getTime()
+									obj['aTag'].push($(this).attr('href')+"?level="+k);
 								}else{
-									//if(/src/.test($(this).attr('src'))){//有些图片大图链接藏在
-									//}
 									obj['imgTag'].push($(this).attr('src'));
-									loadImg($(this).attr('src'));
+									//loadImg($(this).attr('src'));
 								}
 							}else{
 								if((typeof $(this).attr('href'))!=='undefined'){
-									obj['aTag'].push(encodeUrl+$(this).attr('href'));
+									obj['aTag'].push(searchUrl+$(this).attr('href')+"?level="+k);
 								}else{
 									obj['imgTag'].push(encodeUrl+$(this).attr('src'));
-									loadImg(encodeUrl+$(this).attr('src'));
+									//loadImg(searchUrl+$(this).attr('src'));
 								}
 							}
 						}
 					})
 				}
 				return obj;
-			})($a,$img);
+			})($a,$img);//所有需要分析的图片和超链接对象
 			
 			if(_link.aTag.length>0||_link.imgTag.length>0){
 				linkDB.push(_link);
 			}
 			
-			//console.log(_link.imgTag);
+			//console.log(_link.aTag);
 			for(var j=0;j<_link.aTag.length;j++){
-				//(function(i){
-					//setTimeout(function(){
+				(function(j){
+					setTimeout(function(){
 						getLink(_link.aTag[j]);
-					//},400*i)
-				//})(j)
+					},100*j)
+				})(j)
 			}
 			
 		}else if(error){
