@@ -21,7 +21,12 @@ http.createServer(function(request,response){
 		post = querystring.parse(post);//把上诉那串ascii编码的转成对象格式
 		console.log(post);
 		// 设置响应头部信息及编码（也可以不指定响应类型和编码格式，会默认使用客户端请求时的content-type）
-		response.writeHead(200, {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'});//内容会返回给客户端
+		response.writeHead(200, 
+			{
+				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+				'Access-Control-Allow-Origin': '*'
+			}
+		);//内容会返回给客户端
 		response.write(JSON.stringify(post));//内容会返回给客户端
 		response.end("返回成功！");//内容会返回给客户端
 	})
