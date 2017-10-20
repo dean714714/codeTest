@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>vue_object</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_443996_14ti87nwkwc23xr.css"/>
+	  <!-- built style files will be auto injected -->
+	  <script type="text/javascript">
+	  	var os = (function(){
+	  		if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+	  			return 'andriod';
+	  		}else if(/(iPhone)/i.test(navigator.userAgent)){
+	  			return 'ios'
+	  		}
+	  	})();
+	  	var baseSize = 10*screen.width/375;
+	  	//10,表示当前在750设计稿下的html根节点的字体大小。375表示iphone 750宽度对应的设备独立像素
+			document.getElementsByTagName('html')[0].style.cssText = "font-size: "+baseSize+"px !important"
+		</script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

@@ -1,0 +1,67 @@
+/* =========
+Your custom styles go here
+ ========= */
+/*****global*****/
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	background: #f5f4f9;
+	font-family: helvetica,sans-serif,arial;
+	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+  	overflow: auto !important;
+}
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+ul{
+	list-style: none;
+}
+img{
+	display: block;
+}
+.borderR{
+	border-right: 1px solid #DEDEDE;
+}
+.action{
+	font-size: 1.2rem;
+	letter-spacing: 0.1rem;
+	color: #999999;
+	text-align: center;
+}
+.borderT,.borderB{
+	position: relative;
+}
+.borderT::before{
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: auto;
+	right: auto;
+	height: 1px;
+	width: 100%;
+	background-color: #DEDEDE;
+	display: block !important;
+	z-index: 15;
+	-webkit-transform-origin: 50% 0;
+	transform-origin: 50% 0;
+}
+.borderB::after{
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: auto;
+	top: auto;
+	height: 1px;
+	width: 100%;
+	background-color: #DEDEDE;
+	display: block !important;
+	z-index: 15;
+	-webkit-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+}
