@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>绿色生活</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <!--<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_443996_14ti87nwkwc23xr.css"/>-->
+    <script src="static/js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="static/js/jsBridge.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://api.smkhmh.com/weather/weather.php?city=杭州"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.7.2/echarts.common.min.js" type="text/javascript" charset="utf-8"></script>-->
+	  <!-- built style files will be auto injected -->
+	  <script type="text/javascript">
+	  	
+	  	var appGetData;//获取token
+			function sendTokenToWap(data){
+				appGetData = data;
+				//alert(data)
+			}
+	  	function isApp(name){//判断是不是App内嵌webview  
+			    let arr_last = window.navigator.userAgent.split(" ");
+			    let state=false;
+			    for(var i=0; i < arr_last.length; i++){
+			        var items = arr_last[i].split("/");
+			    	if(items[0] == name){
+			        	return true;
+			    	}else{
+			      		state = false;
+			    	}
+			    }
+			    return state;
+			};
+	  	window.onload = function(){
+
+				//发送获取token请求，再ios里只能放在onload里才行，不然都会导致资源请求中断的问题
+				if(isApp('smkVersion')){//页面加载完成改变href触发上诉sendTokenToWap函数
+					window.location.href= "smkapp://postSMKUserToken";
+					jsBridge.setTitle("绿色生活");//设置app title
+				};
+			}
+	  	
+	  	window.onunload = function(){//清除登录状态
+	  		localStorage.setItem('loginStatus','false');
+	  	}
+	  	
+//	  	setTimeout(function(){
+//	  		appGetData = 'this is token'
+//	  	},200)
+	  	
+	  	var os = (function(){
+	  		if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+	  			return 'andriod';
+	  		}else if(/(iPhone)/i.test(navigator.userAgent)){
+	  			return 'ios'
+	  		}
+	  	})();
+	  	var baseSize = 10*screen.width/375;
+	  	//10,表示当前在750设计稿下的html根节点的字体大小。375表示iphone 750宽度对应的设备独立像素
+			document.getElementsByTagName('html')[0].style.cssText = "font-size: "+baseSize+"px !important"
+		</script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
