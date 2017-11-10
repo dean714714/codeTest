@@ -6,8 +6,8 @@
 		var obj = {};
 		var optionsDefault = {
 			fromN:$dom.innerHTML*1,//初始值
-			toN:0,//最终值
-			lazy:0,//延时
+			//toN:0,//最终值
+			lazy:10,//延时
 			during:'1s',//历时
 		};
 		
@@ -28,7 +28,6 @@
 		var $numPosArr = [];
 		
 		function resetNum(length){//把数字分割成一个个单独的数字组
-			//var length = (optionsDefault.fromN+'').length>(optionsDefault.toN+'').length?(optionsDefault.fromN+'').length:(optionsDefault.toN+'').length;
 			var _num = ['0','1','2','3','4','5','6','7','8','9','.'],length=length;
 			if($dom.getElementsByTagName('span').length>0){//如果已经分割过，后续的变化只是添加新的数字组而不是全部重新生成
 				length = $dom.children.length - length;
@@ -163,13 +162,14 @@
 			},
 			set: function(val){
 				var _this = this;
-				_this.toN = val;
+				//_this.toN = val;
 				resetNum((val+'').length);
 				setTimeout(function(){
 					numAni($numPosArr,val);
 				},_this.lazy);
 			}
 		})
+		
 	}
 	
 	ev.Counter = Counter;

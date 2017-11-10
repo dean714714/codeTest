@@ -21,7 +21,6 @@
 		var $dom = document.getElementById('counter');
 		var options = {
 			//fromN:0,//初始值,默认读取dom中的数值
-			toN:100,//最终值
 			lazy:10,//延时,需要设置非0，不然发现新增数值变动会不现动效
 			during:'1s',//历时
 		};
@@ -30,7 +29,7 @@
 		var $btn = document.getElementById('btn');
 		var $val = document.getElementById('text');
 		$btn.onclick = function(){
-			count.options.setToN = $val.value*1;
+			count.options.setToN = $val.value*1;//设置最终值，可以在此count实例基础上不断变动，数值变动以上次为基础
 		}
 		//下诉自动递增数值
 		var $addBtn = document.getElementById('addBtn'),
