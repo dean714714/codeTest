@@ -54,9 +54,15 @@
 			clear();
 			drawWave(x,y,dis,scaleX,scaleY,pyAngle,function(){
 				//requestAnimationFrame(ani.bind(this,x,y+scaleY*Math.sin(((x+pyAngle*scaleX)/scaleX)*(Math.PI/180)),dis,scaleX,scaleY,pyAngle+dis));
+				if(x-dis===-360){
+					ani(0,200,dis,scaleX,scaleY,pyAngle);
+					console.log("重新开始");//以防不断加大x轴负起点导致渲染会逐渐变慢
+				}else{
+					requestAnimationFrame(ani.bind(this,x-dis,y,dis,scaleX,scaleY,pyAngle+dis));
+				}
 			})
 			
-		})(0,200,1,1/4,40,0)
+		})(0,200,1,1/2,100,90)
 		
 		
 		
