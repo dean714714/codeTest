@@ -15,12 +15,12 @@
 		this.options = (function(){//合并设置
 			var obj = (function(){
 				var o = {};
-				for(key in defaultOptions){
+				for(var key in defaultOptions){
 					o[key] = defaultOptions[key];
 				}
 				return o;
 			})();
-			for(key in options){
+			for(var key in options){
 				obj[key] = options[key];
 			}
 			return obj;
