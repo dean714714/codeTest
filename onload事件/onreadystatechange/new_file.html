@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//onreadystatechange是原生的反应页面加载状况的事件
+			//onreadystatechange和DOMContentLoaded 已经onload事件的区别   http://blog.163.com/qyl_anikin/blog/static/2411750092017223105243408/
+			//MDN: document.onreadystatechange https://developer.mozilla.org/zh-CN/docs/Web/Events/readystatechange
+			document.onreadystatechange = function(){
+				if(document.readyState == "interactive"){
+					//文档加载完成，且被解析(dom树生成),但图片，样式表，js文件等外链子资源仍在加载
+					console.log(new Date().getTime()+":interactive");
+				} 
+				if(document.readyState == "complete"){ 
+					//当页面加载状态为完全结束时进入,文档加载完成且解析成功，外链子资源均加载完成,约等于window.onload，
+					//因为这个状态之后就会触发onload事件，所以onload是此状态之后执行
+					console.log(new Date().getTime()+":complete");
+				} 
+			}
+			if(document.addEventListener){
+				document.addEventListener('DOMContentLoaded',function(){
+					//DOMContentLoaded在页面html、script、style加载完毕即可触发，
+					//无需等待所有资源（image/iframe）加载完毕。（IE9+）,jquery的$(function(){})就是这个时机
+					console.log(new Date().getTime()+":domContentLoaded");
+				})
+			}
+			
+			window.onload = function(){
+				console.log(new Date().getTime()+":一切就绪")
+			}
+			
+		</script>
+	</head>
+	<body>
+		<img id="img" src="../../000Picture_MaterialS/baozou1.jpg" onload="console.log(new Date().getTime()+':图片加载完成')"/>
+	</body>
+</html>

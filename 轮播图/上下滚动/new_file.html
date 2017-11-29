@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				box-sizing: border-box;
+			}
+			.box{
+				display: inline-block;
+				/*border: 1px solid red;*/
+				width: 500px;
+				height: 100px;
+				overflow-y: auto;
+			}
+			.sub{
+				font-size: 24px;
+				line-height: 36px;
+				background: #eee;
+				border-bottom: 1px solid #333;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="subBox">
+				<div class="sub">11111111111</div>
+				<div class="sub">22222222222</div>
+				<div class="sub">33333333333</div>
+				<div class="sub">44444444444</div>
+				<div class="sub">55555555555</div>
+			</div>
+			<div class="subBox">
+				<div class="sub">11111111111</div>
+				<div class="sub">22222222222</div>
+				<div class="sub">33333333333</div>
+				<div class="sub">44444444444</div>
+				<div class="sub">55555555555</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		var $box = document.querySelector('.box');
+		var $subBox = document.querySelector('.subBox');
+		//var $box_h = $box.offsetHeight*1;//本身高度
+		//var $box_sroll_h = $box.scrollHeight*1;//滚动高度
+		
+		function scroll(){
+			if($box.scrollHeight*1>$box.offsetHeight*1){
+				if($box.scrollTop>=($subBox.offsetHeight*1)){
+					$box.scrollTop = 0
+				}else{
+					$box.scrollTop+=1;
+				}
+			}
+		}
+		
+		var ani = setInterval(scroll,1000/60);
+		
+		$box.onmouseover = function() {
+			clearInterval(ani);
+		}
+		$box.onmouseout = function() {
+			ani = setInterval(scroll, 1000/60);
+		}
+		
+	</script>
+</html>
