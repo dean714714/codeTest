@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<!--<script src="https://unpkg.com/vuex"></script>-->
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" name="" id="" value="" v-model="info"/><!--<span>{{info}}</span>-->
+		</div>
+		<div id="app2">
+			<span>{{inputInfo}}</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//不同实例间的通信
+		var app2 = new Vue({
+			el: '#app2',
+			data: {
+				inputInfo: '',
+			},
+			mounted: function(){},
+			methods: {},
+		})
+		var app = new Vue({
+			el: '#app',
+			data: {
+				info: '',
+			},
+			mounted: function(){},
+			methods: {
+				
+			},
+			watch: {
+				info: function(value){
+					app2.inputInfo = this.info;
+				}
+			}
+		})
+		
+	</script>
+</html>

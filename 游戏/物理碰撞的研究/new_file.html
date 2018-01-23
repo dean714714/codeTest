@@ -5,5 +5,38 @@
 		<title></title>
 	</head>
 	<body>
+		<canvas id="canvas" width="800" height="400"></canvas>
 	</body>
+	<script type="text/javascript">
+		
+		var $canvas = document.getElementById('canvas');
+		var context = $canvas.getContext('2d');
+		
+		function bg(x,y,w,h){
+			context.fillStyle = 'rgba(0,0,0,0.8)';
+			context.fillRect(x,y,w,h);
+		}
+		
+		function arc(x,y,bj){
+			context.fillStyle = 'rgba(255,255,255,1)';
+			context.beginPath();
+			context.arc(x,y,bj,0,Math.PI*2,true);//(x, y, radius, starAngle,endAngle, anticlockwise),表示圆心的x,y轴位置，半径，开始角度，结束角度，旋转方向（Math.PI表示一个π）
+			context.fill();
+			context.closePath();
+		}
+		
+		$canvas.addEventListener('mousemove',function(ev){
+			var event  =ev||event;
+			bg(0,0,800,800);
+			arc(100,100,50);
+			arc(event.pageX,event.pageY,50);
+		})
+		
+		;(function ani(){
+			//bg(0,0,800,800);
+			//arc(100,100,50);
+			//requestAnimationFrame(ani.bind(this));
+		})()
+		
+	</script>
 </html>

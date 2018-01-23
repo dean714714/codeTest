@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vuex"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" name="" id="" value="" v-model="info"/><span>{{info}}</span>
+			<my-component1></my-component1>
+			<my-component2></my-component2>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		var app = new Vue({
+			el: '#app',
+			data: {
+				info: '',
+			},
+			mounted: function(){},
+			methods: {
+				
+			},
+			components: {
+				'my-component1': {
+					template: '<div>这是一个组件1</div>',
+				},
+				'my-component2': {
+					template: '<div>这是一个组件2</div>',
+				},
+			}
+		})
+		
+	</script>
+</html>

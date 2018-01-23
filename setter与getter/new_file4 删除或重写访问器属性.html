@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//数据属性可以通过obj.name = "新名字"给name属性赋予新得属性值,也可以delete obj.name删除它
+			//但访问器属性
+			var obj = {
+	            name: "Dean",
+	        };
+			Object.defineProperty(obj,"name2",{
+                get: function(){
+                    return this.name
+                },
+                set: function(value){
+                    this.name = value;
+                    console.log(value);
+                }
+            })
+			//定义了一个访问器属性name2，此时进行obj.name2和obj.name2="cindy",回按照既定
+			//程式返回结果，但如果我想要换种返回形式，比方说返回得名字前面加上"super",那我们就得重写
+			//这个访问器属性，于是：
+			Object.defineProperty(obj,"name2",{
+                get: function(){
+                    return "super-"+this.name
+                },
+                set: function(value){
+                    this.name = value;
+                    console.log("super-"+value);
+                }
+            })
+			//但其实会报错TypeError: can't redefine non-configurable property "name2"
+			//也就是不能重定义不允许配置得属性"name2",delete obj.name2也是不被允许得
+			//其实这是一个基础概念，参阅：
+			//https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+			//需要添加描述符，描述该属性得性质：
+			//enumerable : true,当且仅当该属性的enumerable为true时，该属性才能够出现在对象的枚举属性中。默认为 false。
+  			//configurable : true，当且仅当该属性的 configurable 为 true 时，该属性描述符才能够被改变，同时该属性也能从对应的对象上被删除。默认为 false。
+  			//故而，我们需要在定义属性时添加configurable描述符为true即可重写和删除
+  			//即：
+//			Object.defineProperty(obj,"name2",{
+//				configurable: true,
+//              get: function(){
+//                  return this.name
+//              },
+//              set: function(value){
+//                  this.name = value;
+//                  console.log(value);
+//              }
+//          })
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

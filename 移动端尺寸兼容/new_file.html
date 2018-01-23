@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name = "format-detection" content = "telephone=no">
+		<title></title>
+		<script type="text/javascript">
+			
+			var baseSize = 10 * document.documentElement.clientWidth / 375;
+			//10,表示当前在750设计稿下的html根节点的字体大小。375表示iphone 750宽度对应的设备独立像素
+			document.getElementsByTagName('html')[0].style.cssText = "font-size: " + baseSize + "px !important"
+			
+		</script>
+	</head>
+	<body style="font-size: 1.5rem;background: #FFefcc;">
+		移动设备这么多，怎么使用一次定义，就可以自动适配不同设备呢？我们设定'meta name="viewport" ...'之后，我们设置的
+		字体大小还是宽高都会按照设备像素比实现缩放，也就是window.devicePixelRatio。比方说iphone4开始，设备像素比
+		是2起一直到iphone7都是这样（iphone6plus，7plus的dip是3），3GS还是1，也就是设置的大小为10px，实际显示10*dip,
+		而缩放后的这个屏幕分辨率就是所谓的设备独立像素，就像浏览器的按住Ctrl+中键滚动缩放比例一样,所以说不管手机屏幕分辨率（其实只要关心宽度）
+		如何，最终显示的时候都会把它按照dip缩放到设备独立像素这么大显示，故而我们只需要关心在设备独立像素下显示效果就可以了，其他的'meta name="viewport" ...'
+		会帮你完成。320px宽度的iPhone 3GS下的10px,和640px宽度的iPhone4的显示效果是一致的，因为他们的设备独立像素一样都是
+		320px。<br />
+		所以，现在的问题变成如何定义设备独立像素尺寸下的大小，这就简单了。结合rem单位，我们只要动态设定根节点的字体大小，之后其他元素使用
+		rem单位就可以相对于根节点来设定，就不用为每个元素设定不同的大小了，也就是一套尺寸就行。<br />
+		document.documentElement.clientWidth和screen.width都可以获取到设备独立像素的宽度而不是物理宽度，但因为移动端手机上浏览器是永远独占整个
+		屏幕的而不会多个窗口一个屏幕中，所以screen.width没有问题，但如果在桌面电脑上，screen.width永远获取到的是屏幕的宽度
+		用它来设定桌面电脑的基本单位就不行，所以document.documentElement.clientWidth目前来看能很好解决桌面和移动端的这个
+		问题。故而，按照上诉js的方式，我们就可以愉快的编写样式了而不必担心大小不和谐了，注意的是，10和375，需要按照你设计图的大小来
+		设定，10表示在设备独立像素375下的根节点基础单位10px。如果是360px的设备独立像素的安卓机，那就会自动换算成10*360/375=9.6px,
+		这样设计图比例得以完美匹配每台机器。
+		
+	</body>
+</html>

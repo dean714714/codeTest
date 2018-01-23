@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="selectDiy.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			
+			.diySelect{
+				width: 300px;
+				height:32px;
+				line-height:32px;
+				border: 1px solid #eaeaea;
+			}
+			.diySelect:active{
+				background: #ffffcc;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="diySelect" id="sel"></div>
+		
+	</body>
+	<script type="text/javascript">
+		
+		var $sel = document.getElementById("sel");
+		var selectDiy = new SelectDiy($sel,{//定制配置选项
+			value: ['选项一','选项二','选项三'],
+			arrowText: "<b>⇩</b>",//html或text内容
+			arrowActive: {//激活后样式(尚未解决选择同一选项无法改变样式得问题，此配置暂时用处不大)
+//				"background": "#00ff00",
+//				"text-align": "center",
+//				"font-weight": "bold",
+//				"color": "#222200"
+			},
+			callback: function(index,value){//选项切换得回调,index:第几个option,value:该option得值
+				console.log(index+":"+value);
+				console.log(selectDiy.activeOption);//实例化后得对象也带上了当前激活得option得索引和值，默认是选项得第一个
+			}
+		});
+		console.log(selectDiy.activeOption);
+		setTimeout(function(){//改变选项数据
+			selectDiy.setValue(['new选项一','new选项二','new选项三']);
+			console.log(selectDiy.activeOption);
+		},2000)
+		
+	</script>
+</html>
