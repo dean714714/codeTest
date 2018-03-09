@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>冒泡排序</title>
+		<script type="text/javascript">
+			
+			var arr = [1,5,2,4,8,3,6,9,7,0],times=0;
+			
+			var bubbleSort = function(arr){
+				for(var i=0,len=arr.length;i<len-1;i++){
+					for(var j=i+1;j<len;j++){
+						if(arr[i]>arr[j]){//如果前面的比后面的大就交换位置
+							var temp = arr[i];
+							arr[i] = arr[j];
+							arr[j] = temp;
+						}
+						console.log('第'+(++times)+'次排序：'+arr)
+					}
+				}
+				return arr;
+			}
+			
+			console.log(bubbleSort(arr))
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

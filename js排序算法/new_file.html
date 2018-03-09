@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			var arr = [11,43,2,7,12,100,0,0,32,32],times=0;
+			var maxSort = function(arr,temp){
+				
+				var obj = (function(arr){//以数组值作为对象key和value转换成对象
+					for(var i=0,len=arr.length,o={};i<len;i++){
+						o[arr[i]] = arr[i];
+					}
+					return o;
+				})(arr);
+				var _max = Math.max.apply(Math,arr);
+				temp.push(_max);
+				delete obj[_max];//删除对象中对应成员
+				arr = (function(obj){
+					var a = [];
+					for(var key in obj){
+						a.push(obj[key]);
+					}
+					return a;
+				})(obj);
+				if(arr.length<=0){console.log(temp);return temp;};
+				maxSort(arr,temp);
+				
+			}
+			console.log(maxSort(arr,[]))
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

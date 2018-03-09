@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>模板字符串 </title>
+		<script type="text/javascript">
+			
+			//old：1、以往，我们在编辑器中书写很长字符串需要换行时都是使用'+'来连接；2、字符串连接变量也是使用'+'来扩展
+			var name = 'Dean';
+			var info = 'your name is '+name+' who is stupid!'+
+					   'because you throw stones on your head.';
+			//alert(info);
+			
+			//new: 现在ES6中，你只需要一个简单的反引号'`'就可以替代加号'+'，作为连接变量或者多行字符串连接，至于变量
+			//可以使用新语法${变量名|表达式|执行函数}来替代，会自动被识别
+			var info2 = `your name is ${name} stupid!
+						because you throw stones on your head.`
+			alert(info2);
+			//注意的时，使用反引号连接多行字符串，所有之间的空格都会被保存，如上诉because之前的空格都会被保存，
+			//方法是
+			//1、换行的字符串全都定格最左侧写
+			//2、使用jQuery的trim()方法或学习hhttp://www.jb51.net/article/109522.htm
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

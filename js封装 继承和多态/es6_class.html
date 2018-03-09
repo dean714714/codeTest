@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ES6新增class定义一个类</title>
+		<script type="text/javascript">
+			
+			//定义一个类，本质是构造函数
+			class Cat {
+				constructor(name,color){//本身属性，也就是构造函数
+					this.name = name;
+					this.color = color;
+				}
+				info(){//定义在原型上的属性
+					console.log(`this is a ${this.color} cat whose name is ${this.name}`)
+				}
+			}
+			let newCat = new Cat('Tom','white');
+			newCat.info()
+			//类本质上和传统的构造函数形式是一样的
+			console.log(Cat === Cat.prototype.constructor);//true
+			
+			//继承：
+			class Cat2 extends Cat {
+				constructor(name,color,age){
+					super(name,color);//调用父类的constructor,相当于method1.html中传统的Cat.call(this,name,color);为新构造函数添加老的属性
+					//继承的时候，必须执行一次super(name,color),因为子类没有自己的this,需要继承父类，否则如果下诉表达式先于super执行就会报错
+					this.age = age;
+				}
+				info2(){
+					console.log(`this is a ${this.age} years old ${this.color} cat whose name is ${this.name}`)
+				}
+			}
+			let newCat2 = new Cat2('Tom','white','3');
+			newCat2.info2();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

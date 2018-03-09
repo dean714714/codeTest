@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>变量的解构赋值</title>
+		<script type="text/javascript">
+			
+			//old: 变量只能直接赋值
+			//var name = 'Dean';
+			//var age = '15';
+			//new: ES6中，可以通过左右数组或对象的模式匹配来对应赋值
+			var [name,age] = ['Dean','15'];
+			console.log(name);//Dean
+			console.log(age);//15
+			//也可以左侧为右侧模式的部分，匹配部分
+			var [name2] = ['Dean','15'];
+			console.log(name2);//Dean
+			
+			var [,age2] = ['Dean','15'];
+			console.log(age2);//15
+			//注意的是：解构赋值必须变量是已经声明的，不然
+			
+			//使用对象的方式
+			var {name3,age3} = {name3:'Dean',age3:'15'}
+			console.log(name3);//Dean
+			console.log(age3);//15
+			//注意：{name3,age3}实际是{name3:name3,age3:age3}的缩写
+			//因为ES6中允许直接在对象中写变量，此时变量名就是属性名
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

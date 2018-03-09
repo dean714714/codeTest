@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Default Parameters（默认参数）</title>
+		<script type="text/javascript">
+			
+			//old:以往我们为函数赋予默认值是这样的
+			function fun(name){
+				var name = name||'Dean';//name未赋值则使用默认值50
+				console.log(name)
+			}
+			fun();//Dean
+			fun('Cindy');//Cindy
+			
+			//new:现在ES6中，我们可以这样进行
+			function fun2(name='Dean'){//多个参数一样，用逗号间隔。(name='Dean',age='15')
+				console.log(name);
+			}
+			fun2();//Dean
+			fun2('Cindy');//Cindy
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

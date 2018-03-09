@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//参阅：http://blog.csdn.net/yangbingbinga/article/details/61424363
+			//https://www.cnblogs.com/vajoy/p/4902935.html
+			
+			/*普通函数中的this:
+			1. this总是代表它的直接调用者(js的this是执行上下文), 例如 obj.func ,那么func中的this就是obj
+			2.在默认情况(非严格模式下,未使用 'use strict'),没找到直接调用者,则this指的是 window (约定俗成)(**着重**)
+			3.在严格模式下,没有直接调用者的函数中的this是 undefined
+			4.使用call,apply,bind(ES5新增)绑定的,this指的是 绑定的对象
+			
+			箭头函数中的this
+			箭头函数没有自己的this, 它的this是继承而来; 默认指向在定义它时所处的对象(宿主对象),而不是执行时的对象, 
+			定义它的时候,可能环境是window; 箭头函数可以方便地让我们在 setTimeout ,setInterval中方便的使用this*/
+			
+			var obj = {
+				say: function () {
+					console.log(this);//obj{...}
+					var f1 = function () {
+						//虽然f1是在obj对象内的，但对于普通函数模式来说this指向函数的执行环境而不是像箭头函数一样的
+						//定义时的环境，所以此时执行f1，找不到这样一个obj.f1,则this指向window,如果使用严格模式
+						//'use strict';则会指向undefined
+						console.log(this); // window, f1调用时,没有宿主对象,默认是window
+						setTimeout(() => {
+							//箭头函数没有自己的this，但我们依旧可以在里面使用this,那是因为作用域链的关系，使之去父级
+							//作用域查找到这个this的缘故。而上诉中，f1是普通函数模式，它有自己的this,他的this指向window
+							//所以此时this即是window,而作用域链找到了想找的也就结束了查找。故而说，箭头函数中的this
+							//是继承来的。可以将上诉say:function(){},f1 = function(){}改成箭头函数查看结果加深理解
+				    		console.log(this); // window
+				    		console.log(arguments)
+						})
+					};
+					f1();
+				}
+			}
+			obj.say()
+			
+			//注意的是：箭头函数中除了没有自己的this,是向上查找作用域的来的之外，还有arguments,super(ES6),new.target(ES6)
+			//也是同样的性质。若想使用arguments的特性，可以使用es6的剩余参数（...）特性，参见
+			//https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Rest_parameters
+			//如下：
+			var fun = (...args)=>{
+				console.log(args)
+			}
+			fun(1,2,3);//[1,2,3]
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -37,8 +37,9 @@
 	function getStyle(){//获取页面中现有style标签下的样式
 		var styleSheet = document.styleSheets;
 		var str = ''
+		console.log(styleSheet)
 		for(var j=0;j<styleSheet.length;j++){
-			var rules = styleSheet[j].cssRules;
+			var rules = styleSheet[j].cssRules||[];
 			for(var i=0;i<rules.length;i++){
 				str += rules[i].cssText;
 			}

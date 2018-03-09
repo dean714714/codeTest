@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
+		<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+		<style type="text/css">
+			
+			.grid-item { 
+				width: 400px;/*40%*/
+				height: 80px;
+				background: #aa5555;
+				border: 2px solid #880000;
+				margin-bottom: 20px;
+			}
+			.grid-item--width2 { 
+				width: 600px; 
+			}
+			.grid-item--height2{
+				height: 40px;
+			}
+			.grid-item--height3{
+				height: 120px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="grid">
+		  <div class="grid-item">1</div>
+		  <div class="grid-item grid-item--width2 grid-item--height2">2</div>
+		  <div class="grid-item grid-item--height3">3</div>
+		  <div class="grid-item">4</div>
+		  <div class="grid-item">5</div>
+		  <div class="grid-item">6</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		
+		//https://masonry.desandro.com
+		// vanilla JS
+		// init with element
+		var grid = document.querySelector('.grid');
+		var msnry = new Masonry( grid, {
+		  // options...
+		  	initLayout: true,//是否初始化，默认true,如为false,可使用msnry.layout();初始化
+			itemSelector: '.grid-item',
+			columnWidth: 200,
+			gutter: 10,//横向间隔,垂直间隔通过对grid-item设置margin-bottom的css
+			horizontalOrder: true,//依次水平向右排，如果为false则优先放置在更高位置的空位，看官网options介绍
+			fitWidth: true,
+			originLeft: false,//是否靠左对齐
+			originTop: false,//是否靠顶对齐
+			transitionDuration: '0.8s',//过渡动画时长
+			stagger: 30,
+			resize: true,//是否自适应窗口缩放
+			//percentPosition: true,//是否用百分比表示尺寸
+		});
+		
+		// init with selector
+		var msnry = new Masonry( '.grid', {
+		  // options...
+		});
+		
+	</script>
+</html>

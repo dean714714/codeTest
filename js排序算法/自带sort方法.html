@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>sort()方法</title>
+		<script type="text/javascript">
+			
+			var arr = [0,1,5,10,15],times=0;
+			var arr2 = ['img1','img2','img7','img6','img3','img5','img4'];
+			
+			var sortFun = function(a,b){
+				//需要两个参数，传入的值按照下面return的大小来判断前后
+				//如果返回的是小于0的，则a在前，b在后，否则相反
+				console.log(`${a};${b};第${++times}次`)
+				return a-b;
+			}
+			
+			console.log(arr.sort(sortFun));
+			
+			//sort()的排序机理是更具字符在ASCII的顺序来排序的，所以内部都会通过toString()把比较的两个对象转换成字符来比价，当然
+			//你也可以自定义比较函数，就像上诉sortFun来定义怎么计算先后顺序。
+			//如果arr.sort()上诉不加sortFun,则结果会是0,1,10,15,5
+			//而对于arr2,发现排完还是原先的顺序，
+			//要实现arr2按照升序排序，就需要提出img的序号来比较，如下：
+			var sortFun2 = function(a,b){
+				console.log(a);//NaN
+				a = a.split('img')[1];
+				b = b.split('img')[1];
+				return a-b;
+			}
+			console.log(arr2.sort(sortFun2));//输出期望的排序结果
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

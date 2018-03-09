@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>快速排序</title>
+		<script type="text/javascript">
+			
+			var arr = [1,5,2,4,8,3,6,9,7,0],times=0;
+			
+			var quickSort = function(arr){
+				
+				if(arr.length<=1)return arr;
+				
+				var middleNum = arr.splice(Math.floor(arr.length/2),1),//获取中间值
+				leftArr = [],rightArr = [];//定义两个数组用来存放对比中间值后左小右大的数值
+				
+				for(var i=0,len=arr.length;i<len;i++){
+					if(arr[i]<=middleNum){
+						leftArr.push(arr[i]);
+					}else{
+						rightArr.push(arr[i]);
+					}
+					console.log("第"+(++times)+"次排序后："+arr);
+				}
+				
+				return quickSort(leftArr).concat(middleNum,quickSort(rightArr));//递归
+			}
+			
+			console.log(quickSort(arr));
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

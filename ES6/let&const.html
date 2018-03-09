@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>let和const</title>
+		<script type="text/javascript">
+			
+			//https://www.cnblogs.com/chengyunshen/p/7191571.html
+			//http://es6.ruanyifeng.com/#docs/style
+			
+			//*****let
+			//old: 之前声明变量只能通过var（或省略则相当于声明全局变量）或直接function fun(){}声明函数,
+			//存在变量提升的问题，如下
+			console.log(name);//不会报错，输出undefined
+			var name = "Dean";
+			//因为var存在变量提升，会将变量声明提升到当前作用域顶部（变量赋值保留在原地），也就是不管在哪里
+			//定义，都会被提升到顶部进行声明，上诉方式等同于
+				//var name;
+				//console.log(name);
+				//name = "Dean";
+			//*特例：对于function fun(){}而不是var fun = function(){}的方式定义的变量，不仅声明会被提升到作用域顶部
+			//赋值也会被提升到顶部，也就是整体提升
+			
+			//new: ES6中。
+			//1、采用let取代var定义变量不存在变量提升的问题，如果变量先于定义使用就会报错
+			//2、不能在相同作用域内重复声明，如let name="dean";let name='cindy'，会报错
+				//但对于内嵌的其他作用域对某变量重复声明则不会报错，相当于重新赋值
+			
+			//*****const
+			//const用于定义一个常量，也就是值无法改变
+			//js编译器对于const进行了优化，性能优于let，条件允许下优先使用const
+			//例如：所有的函数都应该设置喂常量，因为几乎不会动态去改变它
+			//虽然const存的常量不能改变，但对于引用类型如对象，因为存的是对象的索引也就是地址，所以还是可以改变对象的值的
+			//只要地址不改变，如const a={};可以a.name = 'dean';但不能a = {name:'dean'};
+			
+			//注意点：
+			//let和const为js新增了块级作用域，也就是{}包含的代码块，如if(){},for(){}
+			//在代码块内用let和const定义的变量和常量只在该代码块和子代码块内可访问，外部无法访问
+			//var不受代码块影响，也就是对于var定义的变量不存在块级作用域
+			
+			//上诉学习不难理解下诉面试常问题：
+			for(var i=0;i<10;i++){
+				setTimeout(function(){
+					console.log(i)
+				},1000)
+			}
+			setTimeout(function(){
+				i = 2;
+			},500)
+			//同时输出十次10；原因是：
+			//1、首先for遍历是同步任务和setTimeout是异步任务，js的解析原理是先主线程的同步任务解析执行，完成后执行异步任务队列中任务
+				//故而，队列中存在是个定时器全都是1秒后执行的
+			//2、var定义的变量i，因为不存在块级作用域，所以相当于定义在全局
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
