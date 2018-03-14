@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//普通for循环适用于数组，类数组（类型是Object但能使用length、arr[index]）
+			//HtmlCollection对象（参见./codeTest/js获取的对象数组是数组吗），argument都是类数组
+			//具体参见：js类数组转数组的方法https://www.cnblogs.com/guorange/p/6668440.html
+			//JavaScript 有哪些常见的类数组 ? https://www.zhihu.com/question/56945566
+			
+			//可以通过es6 Array.from(ArrayLike)或
+			//es5: Array.prototype.slice.call(ArrayLike) 来将类数组转换成数组
+			
+			//只有转换成普通数组才能直接调用数组的一干方法
+			
+			var arr = [1,2,3,4];
+			for(var i=0,len=arr.length;i<len;i++){
+				console.log(arr[i])
+			}
+			
+			//普通for循环可以针对每个item做出相应操作
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

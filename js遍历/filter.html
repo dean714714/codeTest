@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+			//注意： filter() 不会对空数组进行检测。
+			//注意： filter() 不会改变原始数组。
+			
+			//类似every,不过filter会返回满足条件的数值组成的新数组，而every只是返回布尔值
+			
+			var arr = [1,2,3,4];
+			var arr2 = arr.filter(function(currentValue,index,arr){
+				return currentValue>2
+			})
+			console.log(arr2);//[3,4]
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

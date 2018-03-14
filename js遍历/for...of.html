@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//for...of主要用于遍历数组而不能遍历普通对象（需要结合Object.keys()）
+			//for...of遍历出value,这和for...in遍历出的是key不同
+			//javascript总for of和for in的区别？https://segmentfault.com/q/1010000006658882
+			
+			var arr = [1,2,3,4],obj={name:'dean',age:'15'};
+			for(var item of arr){
+				console.log(item);
+			}
+			
+			//借助Object.keys()实现for...of遍历对象
+			//Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和
+			//使用 for...in 循环遍历该对象时返回的顺序一致 （两者的主要区别是 一个 for-in 循环还会枚举其原型链上的属性）。
+			
+			for(var key of Object.keys(obj)){
+				console.log(obj[key])
+			}
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//forEach() 方法用于调用数组的每个元素，并将元素传递给回调函数。
+			//注意: forEach() 对于空数组是不会执行回调函数的。
+			var arr = [1,2,3,4];
+			arr.forEach(function(currentValue, index, arr){//参数参见map
+				++currentValue;
+				console.log(currentValue)
+			})
+			console.log(arr);//依旧是1，2，3，4,也就是不会改变原始数组
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -13,7 +13,8 @@
 	<script type="text/javascript">
 		
 		//组件的options选项大多与实例化Vue实例时一致
-		//但data属性是一个例外，不能使用对象形式而是函数的方式返回数据
+		//但data属性是一个例外，不能使用对象形式而是函数的方式返回新的对象，对象里写需要的属性
+		//因为组件是复用的，若像实例化Vue实例一样，则会修改一处也会影响其他的
 		Vue.component('my-component',{//tagName,options
 			template: '<div>{{info}}\
 					   		<input type="button" v-model="val" @click="val+=1"/>\

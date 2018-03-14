@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//for...in...循环可以用于arr，也可用于遍历对象
+			//注意点是：会遍历原型链和额外添加的属性，可使用hasOwnpropoty()来判断是否是自身属性方法还是原型链上的
+			
+			var arr = [1,2,3,4],obj={name:'dean',age:'15'};
+			arr.name = 'dean';
+			arr.__proto__.age = '15';
+			for(var key in arr){
+				console.log(arr[key])//1,2,3,4,dean,15
+			}
+			for(var key in obj){
+				if(obj.hasOwnProperty(key)){
+					console.log(obj[key])//dean,15
+				}
+			}
+			
+			//一般用for...in遍历对象而不遍历数组
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
