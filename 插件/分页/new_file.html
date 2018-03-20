@@ -4,12 +4,39 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="paginate.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			
-			
-			
-		</script>
+		<script src="demo.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.demo{
+				margin: 20px;
+				text-align: center;
+			}
+			.demo span{
+				display: inline-block;
+				line-height: 32px;
+				width: 42px;
+				text-align: center;
+				background: #EAEAEA;
+			}
+		</style>
 	</head>
 	<body>
+		<div id="box" style="text-align: center;"></div>
+		<div class="demo" id="demo">
+			<!--<span>第1</span>
+			<span>第2</span>
+			<span>第3</span>
+			<span>第4</span>
+			<span>第5</span>
+			<span>...</span>
+			<span>第10</span>-->
+		</div>
 	</body>
+	<script type="text/javascript">
+		
+		var $box = document.getElementById('box');
+		var paginate = new Paginate($box,{})
+		
+		chooseNum(document.getElementById('demo'),10,8)
+		
+	</script>
 </html>
