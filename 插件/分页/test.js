@@ -47,8 +47,8 @@ function chooseNum(dom,num,index){
 			if(h===0||h===1){
 				h===0&&(newDomArr[h].innerHTML = 1);
 				h===1&&(newDomArr[h].innerHTML = '...');
-			}else if(h>=3){
-				newDomArr[h].innerHTML = num-8+h;
+			}else if(h>=len-num+index-3){
+				newDomArr[h].innerHTML = h-(len-1-num);
 				if(num-index===len-1-h){
 					newDomArr[h].style.cssText = 'background:green;color:#fff;';
 				}
@@ -56,6 +56,18 @@ function chooseNum(dom,num,index){
 				newDomArr[h].style.display = 'none';
 			}
 			dom.appendChild(newDomArr[h]);
+		}
+	}else if(index-2<=2&&index+3>=num){
+		for(var m=0,len=newDomArr.length;m<len;m++){
+			if(m<num){
+				newDomArr[m].innerHTML = m+1;
+				if(index-1===m){
+					newDomArr[m].style.cssText = 'background:green;color:#fff;';
+				}
+			}else{
+				newDomArr[m].style.display = 'none';
+			}
+			dom.appendChild(newDomArr[m]);
 		}
 	}
 	

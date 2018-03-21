@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<script src="paginate.js" type="text/javascript" charset="utf-8"></script>
-		<script src="demo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="paginate.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="test.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			.demo{
 				margin: 20px;
@@ -34,9 +34,40 @@
 	<script type="text/javascript">
 		
 		var $box = document.getElementById('box');
-		var paginate = new Paginate($box,{})
 		
-		chooseNum(document.getElementById('demo'),10,8)
+		var paginate = new Paginate($box,{
+			//options无需拷贝默认项全数设置，可只设置你想修改的项目，如果属性对应的是对象（非数组）会自动实现
+			//最小颗粒度合并。
+			pageNumber: 30,//总页数
+			defaultIndex: 1,//默认选中第几页,1起;若不在选项区间会报错提示
+			pageBtn:{
+				//info:['<<','>>']
+			},
+			pageDot:{
+				'template': 'Pn',//n为占位符，默认为‘n’
+				'style': {
+					//样式包括上下页和每个dot按钮都以键值对的方式写在对象中
+					//activeStyle为点按后的样式，grayStyle为未点击的状态
+					//注意的是pageBtn中activeStyle为默认样式，grayStyle为不可点击的样式
+					activeStyle:{
+						//样式只能使用预留的样式中的那些，当然预留的已经足够用于
+						//分页这个插件使用了，参见默认样式中的预置
+						'background': '#aa0000',
+						'font-weight':'bold'
+					}
+				}
+			}
+		},function(index){
+			console.log(index);
+		})
+		
+		//如果设置了默认index又设置了下述手动设置第几页，因为都会执行一次render,触发callback
+		//即：function(index){console.log(index);})，如果不想默认不执行，只是手动设置
+		//的时候执行，可将默认index设为0，这样会直接return（代码131行）,不进行页面的逻辑运算，也不会执行callback
+		paginate.render(3);//手动指定第几页
+		
+		//以下为实现翻页逻辑的试验代码，具体成果还是paginate.js
+		//chooseNum(document.getElementById('demo'),10,6)
 		
 	</script>
 </html>
