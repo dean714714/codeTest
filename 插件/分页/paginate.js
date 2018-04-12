@@ -160,6 +160,11 @@
 		var options = merge(options,optDefault);
 		this.index = options.defaultIndex;
 		var $el = el;
+		$el.innerHTML = "";
+		if(options.pageNumber<1||!options.pageNumber){
+			console.log("总页数未设置或小于1");
+			return;
+		}
 		var $backWard = document.createElement('span');
 		var $forWard = document.createElement('span');
 		var $dotBox = document.createElement('span');
@@ -178,15 +183,24 @@
 					return i
 				})();
 				_this.index = index;
-				if(index)_this.render(index);
+				if(index){
+					_this.render(index);
+					//callback(_this.index);//回调
+				};
 			})
 			newDomArr.push($dom);
 		}
 		addEvent($backWard,'click',function(e){
-			if(_this.index>1)_this.render(_this.index-1);
+			if(_this.index>1){
+				_this.render(_this.index-1);
+				//callback(_this.index);//回调
+			};
 		})
 		addEvent($forWard,'click',function(e){
-			if(_this.index<options.pageNumber)_this.render(_this.index+1);
+			if(_this.index<options.pageNumber){
+				_this.render(_this.index+1);
+				//callback(_this.index);//回调
+			};
 		})
 		$backWard.innerHTML = options.pageBtn.info[0];
 		$forWard.innerHTML = options.pageBtn.info[1];
@@ -196,13 +210,14 @@
 			if(index<=0||index>options.pageNumber){
 				console.log("页码不在选项区间内");
 				//throw new Error("页码不在选项区间内");
-				return;
+				index=1;
+				//return;
 			}
 			this.index = index;
-			var backWardStyle = index===1
+			var backWardStyle = index*1===1
 							?options.pageBtn.style.grayStyle
 							:options.pageBtn.style.activeStyle;
-			var forWardStyle  = index===options.pageNumber
+			var forWardStyle  = index*1===options.pageNumber*1
 							?options.pageBtn.style.grayStyle
 							:options.pageBtn.style.activeStyle;
 			var dom = $dotBox,num = options.pageNumber;
@@ -225,19 +240,31 @@
 				}
 				
 			}else if(index-2<=2&&index+3<num){
+				//console.log(num)
 				for(var k=0,len=newDomArr.length;k<len;k++){
 					newDomArr[k].style.cssText = bornStyle(options.pageDot.style.grayStyle);
-					if(k<5){
-						newDomArr[k].innerHTML = options.pageDot.template.replace(/n/,k+1);
-						if(k===index-1){
-							newDomArr[k].style.cssText = bornStyle(options.pageDot.style.activeStyle);
+					if(num<=6){//小于等于6的时候，满足条件index-2<=2&&index+3<num的时候让他们全都显示，不然默认页数太少不人性化
+						if(k<=num-1){
+							newDomArr[k].innerHTML = options.pageDot.template.replace(/n/,k+1);
+							if(k===index-1){
+								newDomArr[k].style.cssText = bornStyle(options.pageDot.style.activeStyle);
+							}
+						}else{
+							newDomArr[k].style.display = 'none';
 						}
-					}else if(k===5){
-						newDomArr[k].innerHTML = '...';
-					}else if(k===len-1){
-						newDomArr[k].innerHTML = options.pageDot.template.replace(/n/,num);
 					}else{
-						newDomArr[k].style.display = 'none';
+						if(k<5){
+							newDomArr[k].innerHTML = options.pageDot.template.replace(/n/,k+1);
+							if(k===index-1){
+								newDomArr[k].style.cssText = bornStyle(options.pageDot.style.activeStyle);
+							}
+						}else if(k===5){
+							newDomArr[k].innerHTML = '...';
+						}else if(k===len-1){
+							newDomArr[k].innerHTML = options.pageDot.template.replace(/n/,num);
+						}else{
+							newDomArr[k].style.display = 'none';
+						}
 					}
 					dom.appendChild(newDomArr[k]);
 				}
