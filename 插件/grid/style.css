@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+body{
+	margin:10px;
+	font:normal 14px/1.5 serif;
+}
+.DIN_gc_grid{
+	border:none;
+	border-collapse:collapse;
+	width:100%;
+	font-size: 12px;
+	color:#333;
+	
+}
+.DIN_gc_grid th,.DIN_gc_grid td{
+	border:1px solid #eaeaea;
+	text-align: center;
+	padding:10px;
+}
+.DIN_gc_grid th{
+	background:#ccc;
+	font-weight:bold;
+	line-height:16px;
+}
+#cross_itemBox{
+	margin:10px 0;
+}
+.item *{
+	vertical-align:middle;
+}
+.itemDot{
+	display:inline-block;
+	width:14px;
+	height:14px;
+	border:1px solid #ccc;
+	margin-right:8px;
+	
+}
+.itemDot_sel{
+	background:#0055ff;
+	
+}

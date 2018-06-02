@@ -1,0 +1,41 @@
+{
+
+	"custom-result": {
+		
+		"type": 0,
+		"picName": {
+			"picname": "这是一张图片的地址.jpg"
+		},
+		"returnMapList": [
+			{
+				"fieldName": "fieldName1",
+				"fieldValue": "fieldValue1",
+				"displayValue": "displayValue1",
+				"defaultValue": "defaultValue1",
+				"exchangeRule": "hello=world:world|hello2=world2:world2",
+				"flag": 3,
+				"configType": 1
+			},
+			{
+				"fieldName": "违法时间",
+				"fieldValue": "illegalDate",
+				"displayValue": "{yyyyMMddHHmmssSSS}_",
+				"defaultValue": "",
+				"exchangeRule": "",
+				"flag": 0,
+				"configType": 1
+			},
+			{
+				"fieldName": "fieldName3",
+				"fieldValue": "fieldValue3",
+				"displayValue": "displayValue3",
+				"defaultValue": "defaultValue3",
+				"exchangeRule": "",
+				"flag": 1,
+				"configType": 1
+			}
+		]
+		
+	}
+	
+}
