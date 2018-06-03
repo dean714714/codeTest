@@ -392,7 +392,8 @@
 						fieldValueCopy: "userDefined",
 						displayValue: "",
 						defaultValue: '',
-						exchangeRule: 2
+						exchangeRule: '',
+						flag: 2
 					};
 					
 					break;
@@ -892,15 +893,15 @@
 	}
 	
 	function formChange(thisObj,inputName,value){//表单值变动同步到相应数据对象中
-		if(thisObj[inputName]){
+		if(thisObj[inputName]!=='undefined'){
 			thisObj[inputName] = value
 		}
-		if(thisObj['rule']){
-			if(thisObj['rule'][inputName])thisObj['rule'][inputName] = value;
+		if(thisObj['rule']!=='undefined'){
+			if(thisObj['rule'][inputName]!=='undefined')thisObj['rule'][inputName] = value;
 		}
-		if(!thisObj['rule']&&!thisObj[inputName]){
-			console.log('变动的表单名未在对应对象中找到该名属性')
-		}
+//		if(!thisObj['rule']&&!thisObj[inputName]){
+//			console.log('变动的表单名未在对应对象中找到该名属性')
+//		}
 	}
 	
 	function dialog(id,state,data,okCallback,cancelCallback){
