@@ -40,3 +40,15 @@ body{
 	background:#0055ff;
 	
 }
+.btnBox{
+	overflow: hidden;
+	margin: 10px 0;
+}
+.btnBox div{
+	line-height: 24px;
+	padding: 0 10px;
+	background: #FAFAFA;
+	border: 1px solid #CCCCCC;
+	float: left;
+	margin-right: 10px;
+}

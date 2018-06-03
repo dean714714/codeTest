@@ -544,7 +544,7 @@
 					return;
 				}
 			}
-			tips('请先选中一栏！');
+			alert('请先选中一栏！');
 		})
 		$DIN_opera_up.unbind().on('click',function(){
 			var belong = $(this)[0].id.split("_")[0];
@@ -554,7 +554,7 @@
 					return;
 				}
 			}
-			tips('请先选中一栏！');
+			alert('请先选中一栏！');
 		})
 		$UMA_close.unbind().on('click',function(){
 			$(this).parent('.uniMessageAction').hide("fast");
@@ -688,6 +688,7 @@
 							}
 						}
 					})(tdes);
+					modifiedCode = {};
 				}
 				return trObj.vm
 			}
@@ -993,7 +994,7 @@
 			el: document.getElementById(elID),
 			rootClass: 'DIN_gc_grid',
 			noData: function(){
-				return '<span class="no-data"></span>';
+				return '<span class="no-data">没有数据了～～</span>';
 			},
 			title: [//自定义的列的标题信息卸载defineTd里，这里只需要写业务需要的表头信息
 				/*{name:'序号',code:'num'},*/
@@ -1139,7 +1140,7 @@
 	
 	//exports.init = function(){
 		init_event();
-		getGisData(postPipe.cross,'grid','cross');//过车
+		getGisData(postPipe.cross,'crossImageNameGrid','cross');//过车
 		//getGisData(postPipe.illegal,'illegalImageNameGrid','illegal');//违法
 		//getGisData(postPipe.origin,'originImageNameGrid','origin');//区间
 		//console.log(addExportConfig('plateNo'))
